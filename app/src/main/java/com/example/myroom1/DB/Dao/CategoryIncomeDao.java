@@ -20,6 +20,6 @@ public interface CategoryIncomeDao {
     @Query("SELECT * FROM categoryIncome")
     List<CategoryIncome> getAllCategoryIncome();
 
-    @Query("SELECT CategoryIncome.name FROM categoryIncome WHERE id = :categoryIncomeId")
-    CategoryIncome getByIdCategoryIncome(long categoryIncomeId);
+   /* @Query("SELECT CategoryIncome.name FROM categoryIncome WHERE id = :categoryIncomeId")
+    CategoryIncome getByIdCategoryIncome(long categoryIncomeId);*/
 }

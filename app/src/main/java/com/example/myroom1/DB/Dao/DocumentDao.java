@@ -20,6 +20,6 @@ public interface DocumentDao {
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();
 
-    @Query("SELECT Document.name FROM document WHERE id = :documentId")
-    Document getByIdDocument(long documentId);
+    /*@Query("SELECT Document.name FROM document WHERE id = :documentId")
+    Document getByIdDocument(long documentId);*/
 }

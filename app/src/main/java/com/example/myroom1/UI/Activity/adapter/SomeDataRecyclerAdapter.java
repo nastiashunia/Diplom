@@ -39,11 +39,13 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final NewsViewHolder viewHolder = (NewsViewHolder) holder;
-        viewHolder.sumIncome = incomeModels.get(position).sum;
-        viewHolder.categoryIncome = incomeModels.get(position).categoryIncomeId;
-        viewHolder.commentIncome = incomeModels.get(position).comment;
-        viewHolder.dateIncome=incomeModels.get(position).date;
-        viewHolder.documentIncome = incomeModels.get(position).documentId;
+
+        viewHolder.commentIncome.setText(incomeModels.get(position).comment);
+        viewHolder.sumIncome.setText(String.valueOf(incomeModels.get(position).sum));
+        viewHolder.categoryIncome.setText(String.valueOf(incomeModels.get(position).categoryIncomeId));
+        viewHolder.dateIncome.setText(String.valueOf(incomeModels.get(position).date));
+        viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
+        //viewHolder.setText(Str.vof(commentIncome))= incomeModels.get(position).comment;
 
         /*viewHolder.description.setText(incomeModels.get(position).getDescription());*/
     }
@@ -60,15 +62,15 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         public TextView delete;
 
         @BindView(R.id.sumIncome)
-        public int sumIncome;
+        public TextView sumIncome;
         @BindView(R.id.commentIncome)
-        public String commentIncome;
+        public TextView commentIncome;
         @BindView(R.id.dateIncome)
-        public long dateIncome;
+        public TextView dateIncome;
         @BindView(R.id.categoryIncome)
-        public long categoryIncome;
+        public TextView categoryIncome;
         @BindView(R.id.documentIncome)
-        public long documentIncome;
+        public TextView documentIncome;
 
         public NewsViewHolder(View itemView) {
             super(itemView);

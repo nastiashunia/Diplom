@@ -20,11 +20,12 @@ import com.example.myroom1.DB.Model.Income;
 @Database(entities = { Cost.class, Income.class, Document.class, CategoryIncome.class, CategoryCost.class}, version = 1, exportSchema = false)
 public abstract class DatabaseHelper extends RoomDatabase {
 
-    public abstract CostDao getCostDao();
     public abstract IncomeDao getIncomeDao();
-    public abstract CategoryCostDao getCategoryCostDao();
+    /*public abstract CategoryCostDao getCategoryCostDao();
     public abstract CategoryIncomeDao getCategoryIncomeDao();
     public abstract DocumentDao getDocumentDao();
+    public abstract CostDao getCostDao();*/
+
 
     @Override
     protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {

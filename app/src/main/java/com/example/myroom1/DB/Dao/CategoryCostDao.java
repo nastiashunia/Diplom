@@ -20,8 +20,8 @@ public interface CategoryCostDao {
     @Query("SELECT * FROM categoryCost")
     List<CategoryCost> getAllCategoryCost();
 
-    @Query("SELECT CategoryCost.name FROM categoryCost WHERE id = :categoryCostId")
-    CategoryCost getByIdCategoryCost(long categoryCostId);
+    /*@Query("SELECT CategoryCost.name FROM categoryCost WHERE id = :categoryCostId")
+    CategoryCost getByIdCategoryCost(long categoryCostId);*/
 
     /*@Query("SELECT * FROM categoryCost WHERE id IN (:categoryCostId)")
     List<CategoryCost> loadAllById(int[] categoryCostId);*/

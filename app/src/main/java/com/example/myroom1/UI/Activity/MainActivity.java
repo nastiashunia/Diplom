@@ -19,7 +19,7 @@ import com.example.myroom1.UI.Activity.AddIncomeActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SomeDataRecyclerAdapter.OnDeleteListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         SomeDataRecyclerAdapter recyclerAdapter = new SomeDataRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-        recyclerAdapter.setOnDeleteListener((SomeDataRecyclerAdapter.OnDeleteListener) this);
+        recyclerAdapter.setOnDeleteListener(this);
         recyclerView.setAdapter(recyclerAdapter);
+
     }
 
-    //@Override
+    @Override
     public void onDelete(Income incomeModel) {
         databaseHelper.getIncomeDao().deleteIncome(incomeModel);
     }

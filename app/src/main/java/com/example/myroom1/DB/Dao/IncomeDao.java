@@ -5,8 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.myroom1.DB.Model.CategoryCost;
-import com.example.myroom1.DB.Model.Cost;
+
 import com.example.myroom1.DB.Model.Income;
 
 import java.util.List;

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +26,9 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<Income> incomeModels = new ArrayList<>();
     private OnDeleteListener onDeleteListener;
     private Context context;
+    Long date;
 
-    public SomeDataRecyclerAdapter(Context context, List<Income> dataModels) {
+    public SomeDataRecyclerAdapter(Context context, List<Income> incomeModels) {
         this.context = context;
         this.incomeModels = incomeModels;
     }
@@ -39,15 +42,21 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final NewsViewHolder viewHolder = (NewsViewHolder) holder;
+        date = incomeModels.get(position).date;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        String sDate = sdf.format(date);
+     //   date = incomeModels.get(position).date;
 
         viewHolder.commentIncome.setText(incomeModels.get(position).comment);
         viewHolder.sumIncome.setText(String.valueOf(incomeModels.get(position).sum));
         viewHolder.categoryIncome.setText(String.valueOf(incomeModels.get(position).categoryIncomeId));
-        viewHolder.dateIncome.setText(String.valueOf(incomeModels.get(position).date));
+        viewHolder.dateIncome.setText(sDate);
         viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
         //viewHolder.setText(Str.vof(commentIncome))= incomeModels.get(position).comment;
 
         /*viewHolder.description.setText(incomeModels.get(position).getDescription());*/
+
+
     }
 
     @Override
@@ -71,6 +80,8 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         public TextView categoryIncome;
         @BindView(R.id.documentIncome)
         public TextView documentIncome;
+
+
 
         public NewsViewHolder(View itemView) {
             super(itemView);

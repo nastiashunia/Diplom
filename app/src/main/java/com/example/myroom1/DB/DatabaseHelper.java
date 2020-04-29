@@ -21,11 +21,20 @@ import com.example.myroom1.DB.Model.Income;
 public abstract class DatabaseHelper extends RoomDatabase {
 
     public abstract IncomeDao getIncomeDao();
-    /*public abstract CategoryCostDao getCategoryCostDao();
+    @SuppressWarnings("WeakerAccess")
     public abstract CategoryIncomeDao getCategoryIncomeDao();
-    public abstract DocumentDao getDocumentDao();
-    public abstract CostDao getCostDao();*/
 
+    public abstract CategoryCostDao getCategoryCostDao();
+  //  public abstract CategoryIncomeDao getCategoryIncomeDao();
+    public abstract DocumentDao getDocumentDao();
+    public abstract CostDao getCostDao();
+
+    public void run() {
+        CategoryIncome categoryIncome = new CategoryIncome();
+        for (int i = 0; i < CategoryIncome.CATEGORY_START_NAME.length; i++) {
+            categoryIncome.name = CategoryIncome.CATEGORY_START_NAME[i];
+            getCategoryIncomeDao().insertCategoryIncome(categoryIncome);
+        }}
 
     @Override
     protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {

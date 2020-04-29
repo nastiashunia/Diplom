@@ -1,6 +1,8 @@
 package com.example.myroom1.UI.Activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CalendarView;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +14,14 @@ import com.example.myroom1.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import android.os.Bundle;
+import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.stream.LongStream;
 
 public class AddIncomeActivity extends AppCompatActivity {
 
@@ -21,19 +30,56 @@ public class AddIncomeActivity extends AppCompatActivity {
     @BindView(R.id.commentIncome)
     EditText commentIncome;
     @BindView(R.id.dateIncome)
-    EditText dateIncome;
+    CalendarView dateIncome;
     @BindView(R.id.categoryIncome)
     EditText categoryIncome;
     @BindView(R.id.documentIncome)
     EditText documentIncome;
+    @BindView(R.id.date)
+    EditText dateT;
 
-   /* Long date; cv = (CalendarView)findViewById(R.id.calendarView1); date = cv.getDate();*/
+    Long date;
+    long timeMilli2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         ButterKnife.bind(this);
+        dateIncome = (CalendarView)findViewById(R.id.dateIncome);
+
+        dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
+
+                int mYear = year;
+                int mMonth = month;
+                int mDay = dayOfMonth;
+
+                String selectedDate = new StringBuilder().append(mDay)
+                        .append(".").append(mMonth + 1).append(".").append(mYear)
+                        .append(" ").toString();
+
+                Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
+
+                date = dateIncome.getDate();
+                dateIncome.setVisibility(View.GONE);
+                Calendar c = Calendar.getInstance();
+                c.set(year, month , dayOfMonth, 0 ,0);
+                timeMilli2 = c.getTimeInMillis();
+               // SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+               // String sDate = sdf.format(date);
+
+                dateT.setText(selectedDate);
+                dateT.setVisibility(View.VISIBLE);
+            }});
+       /* cv.setOnDateChangeListener(new OnDateChangeListener(){
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
+            { if(cv.getDate() != date)
+            { date = cv.getDate();
+            Toast.makeText(view.getContext(), "Year=" + year + " Month=" + month + " Day=" + dayOfMonth, Toast.LENGTH_LONG).show(); } } });
+   */
     }
 
     @OnClick(R.id.save)
@@ -43,7 +89,7 @@ public class AddIncomeActivity extends AppCompatActivity {
         Income model = new Income();
         model.comment = commentIncome.getText().toString();
         model.sum = Integer.parseInt(sumIncome.getText().toString());
-        model.date = Long.parseLong(dateIncome.getText().toString());
+        model.date = timeMilli2;
         model.categoryIncomeId = Long.parseLong(categoryIncome.getText().toString());
         model.documentId = Long.parseLong(documentIncome.getText().toString());
 
@@ -58,6 +104,9 @@ public class AddIncomeActivity extends AppCompatActivity {
 
         finish();
     }
+
+    //Настраиваем слушателя смены даты:
+
 
   /*  cv.setOnDateChangeListener(new OnDateChangeListener(){
         public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {

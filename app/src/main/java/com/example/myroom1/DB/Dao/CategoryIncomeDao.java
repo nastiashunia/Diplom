@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface CategoryIncomeDao {
     @Insert
-    void insertCategoryIncome(CategoryIncome categoryIncome);
+    public void insertCategoryIncome(CategoryIncome categoryIncome);
 
     @Delete
     void deleteCategoryIncome(CategoryIncome categoryIncome);

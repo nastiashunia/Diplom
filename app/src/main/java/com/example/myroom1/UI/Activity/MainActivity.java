@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.myroom1.DB.DatabaseHelper;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements SomeDataRecyclerA
 
     private DatabaseHelper databaseHelper;
 
+    private static final String MY_SETTINGS = "my_settings";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,21 @@ public class MainActivity extends AppCompatActivity implements SomeDataRecyclerA
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         databaseHelper = App.getInstance().getDatabaseInstance();
+
+
+        SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
+                Context.MODE_PRIVATE);
+        // проверяем, первый ли раз открывается программа
+        boolean hasVisited = sp.getBoolean("hasVisited", false);
+
+        if (!hasVisited) {
+            databaseHelper.run(); // не забудьте подтвердить изменения
+        }
     }
+//если (взятьбулин("первыйраз", правда)){
+//заполнить бд
+//положитьбулин("первыйраз", ложь)
+//}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

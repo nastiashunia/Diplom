@@ -29,13 +29,20 @@ public abstract class DatabaseHelper extends RoomDatabase {
     public abstract DocumentDao getDocumentDao();
     public abstract CostDao getCostDao();
 
-    public void run() {
+    public void run_category_income() {
         CategoryIncome categoryIncome = new CategoryIncome();
         for (int i = 0; i < CategoryIncome.CATEGORY_START_NAME.length; i++) {
             categoryIncome.name = CategoryIncome.CATEGORY_START_NAME[i];
             getCategoryIncomeDao().insertCategoryIncome(categoryIncome);
         }}
 
+
+    public void run_category_cost() {
+        CategoryCost categoryCost = new CategoryCost();
+        for (int i = 0; i < CategoryCost.CATEGORY_COST_START_NAME.length; i++) {
+            categoryCost.name = CategoryCost.CATEGORY_COST_START_NAME[i];
+            getCategoryCostDao().insertCategoryCost(categoryCost);
+        }}
     @Override
     protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
         return null;

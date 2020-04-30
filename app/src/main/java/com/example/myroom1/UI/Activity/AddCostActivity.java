@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myroom1.App;
 import com.example.myroom1.DB.DatabaseHelper;
-import com.example.myroom1.DB.Model.CategoryIncome;
+import com.example.myroom1.DB.Model.CategoryCost;
+import com.example.myroom1.DB.Model.Cost;
 import com.example.myroom1.DB.Model.Document;
-import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,29 +28,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddIncomeActivity extends AppCompatActivity {
+public class AddCostActivity extends AppCompatActivity {
 
-    @BindView(R.id.sumIncome)
-    EditText sumIncome;
-    @BindView(R.id.commentIncome)
-    EditText commentIncome;
-    @BindView(R.id.dateIncome)
-    CalendarView dateIncome;
-   /*@BindView(R.id.documentIncome)
-    EditText documentIncome;*/
+    @BindView(R.id.sumCost)
+    EditText sumCost;
+    @BindView(R.id.commentCost)
+    EditText commentCost;
+    @BindView(R.id.dateCost)
+    CalendarView dateCost;
     @BindView(R.id.date)
     EditText dateT;
 
     Long date;
     long timeMilli2;
-    @BindView(R.id.categoryIncome)
+    @BindView(R.id.categoryCost)
     Spinner spinerCategory;
-    @BindView(R.id.documentIncome)
+    @BindView(R.id.documentCost)
     Spinner spinerDocument;
 
 
     private List<Document> documentModels = new ArrayList<>();
-    private List<CategoryIncome> categoryModels = new ArrayList<>();
+    private List<CategoryCost> categoryModels = new ArrayList<>();
     private DatabaseHelper databaseHelper;
 
     String s;
@@ -61,11 +59,11 @@ public class AddIncomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_income);
+        setContentView(R.layout.activity_add_cost);
         ButterKnife.bind(this);
-        dateIncome = (CalendarView)findViewById(R.id.dateIncome);
+        dateCost = (CalendarView)findViewById(R.id.dateCost);
 
-        dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
+        dateCost.setOnDateChangeListener(new OnDateChangeListener(){
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
@@ -80,8 +78,8 @@ public class AddIncomeActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
 
-                date = dateIncome.getDate();
-                dateIncome.setVisibility(View.GONE);
+                date = dateCost.getDate();
+                dateCost.setVisibility(View.GONE);
                 Calendar c = Calendar.getInstance();
                 c.set(year, month , dayOfMonth, 0 ,0);
                 timeMilli2 = c.getTimeInMillis();
@@ -91,7 +89,7 @@ public class AddIncomeActivity extends AppCompatActivity {
             }});
         databaseHelper = App.getInstance().getDatabaseInstance();
 
-        categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
+        categoryModels = databaseHelper.getCategoryCostDao().getAllCategoryCost();
         List<String> strings = getNamesFromListCategory(categoryModels);
 
         ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
@@ -132,17 +130,17 @@ public class AddIncomeActivity extends AppCompatActivity {
         });
     }
 
-    private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
+    private List<String> getNamesFromListCategory(List<CategoryCost> categoryModels){
         List<String> stringList = new ArrayList<>();
 
-        for (CategoryIncome c: categoryModels){
+        for (CategoryCost c: categoryModels){
             stringList.add(c.name);
         }
         return stringList;
     }
 
-    private void getNameIdCategory(List<CategoryIncome> categoryModels){
-        for (CategoryIncome c: categoryModels){
+    private void getNameIdCategory(List<CategoryCost> categoryModels){
+        for (CategoryCost c: categoryModels){
             if(s.equals(c.name)){
                 idcategory = c.id;
                 return;
@@ -173,26 +171,18 @@ public class AddIncomeActivity extends AppCompatActivity {
     public void onSaveClick() {
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
 
-        Income model = new Income();
-        model.comment = commentIncome.getText().toString();
-        model.sum = Integer.parseInt(sumIncome.getText().toString());
+        Cost model = new Cost();
+        model.comment = commentCost.getText().toString();
+        model.sum = Integer.parseInt(sumCost.getText().toString());
         model.date = timeMilli2;
-        model.categoryIncomeId = idcategory;
-        //model.documentId = Long.parseLong(documentIncome.getText().toString());
+        model.categoryCostId = idcategory;
+        //model.documentId = Long.parseLong(documentCost.getText().toString());
         model.documentId = iddocument;
 
-        databaseHelper.getIncomeDao().insertIncome(model);
+        databaseHelper.getCostDao().insertCost(model);
 
         finish();
     }
 
 
 }
-/*<EditText
-        android:id="@+id/documentIncome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="documentIncome"
-                android:inputType="textPersonName" />*/

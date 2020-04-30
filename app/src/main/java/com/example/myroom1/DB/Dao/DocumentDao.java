@@ -12,10 +12,10 @@ import java.util.List;
 @Dao
 public interface DocumentDao {
     @Insert
-    void insert(Document document);
+    void insertDocument(Document document);
 
     @Delete
-    void delete(Document document);
+    void deleteDocument(Document document);
 
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();

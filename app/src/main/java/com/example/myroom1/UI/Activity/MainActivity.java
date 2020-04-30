@@ -1,43 +1,27 @@
 package com.example.myroom1.UI.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myroom1.App;
 import com.example.myroom1.DB.DatabaseHelper;
-import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
 
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
-import com.example.myroom1.App;
-import com.example.myroom1.UI.Activity.adapter.SomeDataRecyclerAdapter;
-import com.example.myroom1.UI.Activity.AddIncomeActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-public class MainActivity extends AppCompatActivity implements SomeDataRecyclerAdapter.OnDeleteListener {
-
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-
+public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
-
     private static final String MY_SETTINGS = "my_settings";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ButterKnife.bind(this);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         databaseHelper = App.getInstance().getDatabaseInstance();
 
 
@@ -47,46 +31,26 @@ public class MainActivity extends AppCompatActivity implements SomeDataRecyclerA
         boolean hasVisited = sp.getBoolean("hasVisited", false);
 
         if (!hasVisited) {
-            databaseHelper.run();
+            databaseHelper.run_category_income();
+            databaseHelper.run_category_cost();
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
             e.commit();
         }
-    }
-//если (взятьбулин("первыйраз", правда)){
-//заполнить бд
-//положитьбулин("первыйраз", ложь)
-//}
+}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add_button, menu);
-        return true;
+    public void addi(View view) {
+        Intent intent1 = new Intent(this, IncomeActivity.class);
+        startActivity(intent1);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add: {
-                startActivity(new Intent(this, AddIncomeActivity.class));
-                break;
-            }
-        }
-        return false;
+    public void adds(View view) {
+        Intent intent = new Intent(this, CostActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        SomeDataRecyclerAdapter recyclerAdapter = new SomeDataRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-        recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);
-
-    }
-
-    @Override
-    public void onDelete(Income incomeModel) {
-        databaseHelper.getIncomeDao().deleteIncome(incomeModel);
+    public void doc(View view) {
+        Intent intent1 = new Intent(this, DocumentActivity.class);
+        startActivity(intent1);
     }
 }

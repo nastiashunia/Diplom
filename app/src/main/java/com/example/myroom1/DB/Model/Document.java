@@ -18,4 +18,6 @@ public class Document {
     public long start_date;
 
     public long finish_date;
+
+
 }

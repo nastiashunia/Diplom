@@ -11,4 +11,8 @@ public class CategoryCost {
     public long id;
 
     public String name;
+
+    public static final String[] CATEGORY_COST_START_NAME ={
+            "Продукты", "Красота","Одежда","Подарки","Визаж","Обучение","Машина","Ремонт",
+            "Строительство","Обувь","Благотворительность","Съемки","Комуналка","Аренда","Съем"};
 }

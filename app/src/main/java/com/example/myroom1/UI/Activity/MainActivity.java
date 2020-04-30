@@ -47,7 +47,10 @@ public class MainActivity extends AppCompatActivity implements SomeDataRecyclerA
         boolean hasVisited = sp.getBoolean("hasVisited", false);
 
         if (!hasVisited) {
-            databaseHelper.run(); // не забудьте подтвердить изменения
+            databaseHelper.run();
+            SharedPreferences.Editor e = sp.edit();
+            e.putBoolean("hasVisited", true);
+            e.commit();
         }
     }
 //если (взятьбулин("первыйраз", правда)){

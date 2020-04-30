@@ -1,5 +1,6 @@
 package com.example.myroom1.UI.Activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -56,9 +57,11 @@ public class AddIncomeActivity extends AppCompatActivity {
     TextView category;
 
     private List<CategoryIncome> categoryModels = new ArrayList<>();
+    private DatabaseHelper databaseHelper;
+
     String s;
     long idcategory;
-
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +93,8 @@ public class AddIncomeActivity extends AppCompatActivity {
                 dateT.setText(selectedDate);
                 dateT.setVisibility(View.VISIBLE);
             }});
+        databaseHelper = App.getInstance().getDatabaseInstance();
+        categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
         List<String> strings = getNamesFromList(categoryModels);
 
         ArrayAdapter monAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
@@ -116,14 +121,10 @@ public class AddIncomeActivity extends AppCompatActivity {
 
         for (CategoryIncome c: categoryModels){
             stringList.add(c.name);
-            //stringList.add(String.valueOf(c.id));
         }
         return stringList;
     }
 
-    /*public boolean equals(CategoryIncome categoryIncome) {
-        return this.s ==  categoryIncome.name;
-    }*/
     private void getNameId(List<CategoryIncome> categoryModels){
         for (CategoryIncome c: categoryModels){
             if(s.equals(c.name)){

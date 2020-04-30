@@ -15,4 +15,8 @@ public class CategoryIncome {
 
     public static final String[] CATEGORY_START_NAME ={
             "Зарплата", "Стипендия"};
+    /*CategoryIncome(long id ,String name){
+        this.id = id;
+        this.name = name;
+    }*/
 }

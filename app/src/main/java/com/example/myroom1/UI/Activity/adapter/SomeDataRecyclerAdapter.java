@@ -45,18 +45,12 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         date = incomeModels.get(position).date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         String sDate = sdf.format(date);
-     //   date = incomeModels.get(position).date;
 
         viewHolder.commentIncome.setText(incomeModels.get(position).comment);
         viewHolder.sumIncome.setText(String.valueOf(incomeModels.get(position).sum));
         viewHolder.categoryIncome.setText(String.valueOf(incomeModels.get(position).categoryIncomeId));
         viewHolder.dateIncome.setText(sDate);
         viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
-        //viewHolder.setText(Str.vof(commentIncome))= incomeModels.get(position).comment;
-
-        /*viewHolder.description.setText(incomeModels.get(position).getDescription());*/
-
-
     }
 
     @Override
@@ -65,7 +59,6 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
-
 
         @BindView(R.id.delete)
         public TextView delete;
@@ -80,8 +73,6 @@ public class SomeDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         public TextView categoryIncome;
         @BindView(R.id.documentIncome)
         public TextView documentIncome;
-
-
 
         public NewsViewHolder(View itemView) {
             super(itemView);

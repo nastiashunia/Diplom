@@ -64,6 +64,7 @@ public class AddIncomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_income);
         ButterKnife.bind(this);
         dateIncome = (CalendarView)findViewById(R.id.dateIncome);
+        setTitle("Добавить доход");
 
         dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
 
@@ -107,6 +108,7 @@ public class AddIncomeActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
 
         });
@@ -147,6 +149,7 @@ public class AddIncomeActivity extends AppCompatActivity {
                 idcategory = c.id;
                 return;
             }
+
         }
     }
 
@@ -165,6 +168,7 @@ public class AddIncomeActivity extends AppCompatActivity {
                 iddocument = c.id;
                 return;
             }
+
         }
     }
 

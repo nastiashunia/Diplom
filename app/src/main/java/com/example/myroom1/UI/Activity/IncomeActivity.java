@@ -9,14 +9,25 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.myroom1.DB.DatabaseHelper;
+import com.example.myroom1.DB.Model.CategoryIncome;
+import com.example.myroom1.DB.Model.Document;
 import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
 
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+
 import com.example.myroom1.App;
 import com.example.myroom1.UI.Activity.adapter.SomeIncomeRecyclerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,39 +36,52 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.name_category_search)
+    //EditText name_category_search;
+    Spinner name_category_search;
+    Long idcategory;
+    String s;
+    String namecategory;
+    Boolean flag;
 
     private DatabaseHelper databaseHelper;
 
-    //private static final String MY_SETTINGS = "my_settings";
+    private List<CategoryIncome> categoryModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income);
-
+        setTitle("Доходы");
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         databaseHelper = App.getInstance().getDatabaseInstance();
 
 
-       /* SharedPreferences sp = getSharedPreferences(MY_SETTINGS,
-                Context.MODE_PRIVATE);
-        // проверяем, первый ли раз открывается программа
-        boolean hasVisited = sp.getBoolean("hasVisited", false);
+        categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
+        List<String> strings = getNamesFromListCategory(categoryModels);
 
-        if (!hasVisited) {
-            databaseHelper.run_category_income();
-            databaseHelper.run_category_cost();
-            SharedPreferences.Editor e = sp.edit();
-            e.putBoolean("hasVisited", true);
-            e.commit();
-        }*/
+        ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
+        name_category_search.setAdapter(categoryAdapter);
+
+        name_category_search.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                s = parent.getSelectedItem().toString();
+                getNameIdCategory(categoryModels);
+                poisk();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
     }
-//если (взятьбулин("первыйраз", правда)){
-//заполнить бд
-//положитьбулин("первыйраз", ложь)
-//}
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,15 +103,66 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     @Override
     protected void onResume() {
         super.onResume();
-
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
         recyclerAdapter.setOnDeleteListener(this);
         recyclerView.setAdapter(recyclerAdapter);
-
     }
 
     @Override
     public void onDelete(Income incomeModel) {
         databaseHelper.getIncomeDao().deleteIncome(incomeModel);
+    }
+
+    public void search(View view) {
+       /* namecategory = name_category_search.getText().toString();
+        databaseHelper = App.getInstance().getDatabaseInstance();
+        categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
+        getNameIdCategory(categoryModels);
+        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
+        recyclerAdapter.setOnDeleteListener(this);
+        recyclerView.setAdapter(recyclerAdapter);*/
+
+       /* SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
+        recyclerAdapter.setOnDeleteListener(this);
+        recyclerView.setAdapter(recyclerAdapter);
+        */
+        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
+        recyclerAdapter.setOnDeleteListener(this);
+        recyclerView.setAdapter(recyclerAdapter);
+
+    }
+    public void poisk(){
+        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
+        recyclerAdapter.setOnDeleteListener(this);
+        recyclerView.setAdapter(recyclerAdapter);
+    }
+
+   /* private void getNameIdCategory(List<CategoryIncome> categoryModels){
+        for (CategoryIncome c: categoryModels){
+            if(namecategory.equals(c.name)){
+                idcategory = c.id;
+                return;
+            }
+
+        }
+    }*/
+
+    private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
+        List<String> stringList = new ArrayList<>();
+
+        for (CategoryIncome c: categoryModels){
+            stringList.add(c.name);
+        }
+        return stringList;
+    }
+
+    private void getNameIdCategory(List<CategoryIncome> categoryModels){
+        for (CategoryIncome c: categoryModels){
+            if(s.equals(c.name)){
+                idcategory = c.id;
+                return;
+            }
+
+        }
     }
 }

@@ -61,6 +61,7 @@ public class AddCostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_cost);
         ButterKnife.bind(this);
+        setTitle("Добавить расход");
         dateCost = (CalendarView)findViewById(R.id.dateCost);
 
         dateCost.setOnDateChangeListener(new OnDateChangeListener(){

@@ -18,11 +18,14 @@ import com.example.myroom1.R;
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private static final String MY_SETTINGS = "my_settings";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         databaseHelper = App.getInstance().getDatabaseInstance();
+        setTitle("Financial assistant");
 
 
         SharedPreferences sp = getSharedPreferences(MY_SETTINGS,

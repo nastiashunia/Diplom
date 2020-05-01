@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.myroom1.DB.Model.Cost;
+import com.example.myroom1.DB.Model.Income;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public interface CostDao {
 
     @Query("SELECT * FROM Cost")
     List<Cost> getAllCost();
+
+
+    @Query("SELECT * FROM Cost WHERE categorycost_id = :categoryId")
+    List<Cost> getCostByIdCategory(long categoryId);
 
 
 }

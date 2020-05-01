@@ -51,6 +51,7 @@ public class AddDocumentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_document);
         ButterKnife.bind(this);
+        setTitle("Добавить документ");
         date_start_document = (CalendarView)findViewById(R.id.date_start_document);
 
         date_start_document.setOnDateChangeListener(new OnDateChangeListener(){

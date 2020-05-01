@@ -21,5 +21,8 @@ public interface IncomeDao {
 
     @Query("SELECT * FROM Income")
     List<Income> getAllIncome();
+
+    @Query("SELECT * FROM Income WHERE categoryincome_id = :categoryId")
+    List<Income> getIncomeByIdCategory(long categoryId);
 }
 

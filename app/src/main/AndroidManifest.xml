@@ -23,6 +23,9 @@
         <activity android:name=".UI.Activity.CostActivity" />
         <activity android:name=".UI.Activity.AddDocumentActivity" />
         <activity android:name=".UI.Activity.AddCostActivity" />
+        <activity android:name=".UI.Activity.StatisticsActivity" />
+        <activity android:name=".UI.Activity.StatisticsIncomeActivity" />
+        <activity android:name=".UI.Activity.StatisticsCostActivity" />
     </application>
 
 </manifest>

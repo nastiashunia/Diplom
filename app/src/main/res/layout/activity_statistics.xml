@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Activity.MainActivity">
+    tools:context=".UI.Activity.StatisticsActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,8 +30,8 @@
             android:layout_gravity="center_horizontal"
             android:scrollbarDefaultDelayBeforeFade="400"
             android:scrollbarFadeDuration="250"
-            android:text="Доходы"
-            android:onClick="addi"
+            android:text="Cтатистика по доходам"
+            android:onClick="income"
             android:textColorHint="#29AF2E" />
 
         <Button
@@ -42,28 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="#4CAF50"
-            android:text="Расходы"
-            android:onClick="adds"/>
-        <Button
-            android:id="@+id/button5"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#4CAF50"
-            android:text="Документы"
-            android:onClick="doc"/>
-        <Button
-            android:id="@+id/statistics"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#4CAF50"
-            android:text="Статистика"
-            android:onClick="statistics"/>
+            android:text="Cтатистика по расходам"
+            android:onClick="cost"/>
+
 
     </LinearLayout>
 

@@ -56,4 +56,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent1 = new Intent(this, DocumentActivity.class);
         startActivity(intent1);
     }
+
+    public void statistics(View view) {
+        Intent intent1 = new Intent(this, StatisticsActivity.class);
+        startActivity(intent1);
+    }
 }

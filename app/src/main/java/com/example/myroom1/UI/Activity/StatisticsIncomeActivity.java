@@ -42,28 +42,28 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         databaseHelper = App.getInstance().getDatabaseInstance();
 
-        Calendar c = Calendar.getInstance();
+        Calendar week = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
         Calendar mon = Calendar.getInstance();
-        int m = c.get(Calendar.MONTH);
-        int y = c.get(Calendar.YEAR);
-        int d = c.get(Calendar.DAY_OF_MONTH);
-        int d_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-        c.add(Calendar.DAY_OF_MONTH, -(d_week+1));
+        int m = week.get(Calendar.MONTH);
+        int y = week.get(Calendar.YEAR);
+        int d = week.get(Calendar.DAY_OF_MONTH);
+        int d_week = week.get(Calendar.DAY_OF_WEEK) - 1;
+        week.add(Calendar.DAY_OF_MONTH, -(d_week+1));
         mon.add(Calendar.DAY_OF_MONTH, -(d-1));
-        d = c.get(Calendar.DAY_OF_MONTH);
+        d = week.get(Calendar.DAY_OF_MONTH);
         int dm = mon.get(Calendar.DAY_OF_MONTH);
         int dn = now.get(Calendar.DAY_OF_MONTH);
 //        mon.set(y,m,0);
        // int d_week = c.get(Calendar.);
       //  c.set(year, month , dayOfMonth, 0 ,0);
-        c.set(y,m,d,0,0);
+        week.set(y,m,d,0,0);
         mon.set(y,m,dm,0,0);
         now.set(y,m,dn,0,0);
 
-        timeMilli_now = now.getTimeInMillis();
-        timeMilli_week = c.getTimeInMillis();
-        timeMilli_month = mon.getTimeInMillis();
+        timeMilli_now = now.getTimeInMillis(); //дата сегодняшняя, до какой даты отсчет
+        timeMilli_week = week.getTimeInMillis(); // дата за вычетом недели , т.е. начало недели , от какой даты идет отсчет
+        timeMilli_month = mon.getTimeInMillis(); // дата начала месяца, 1 число месяца
     }
 
     @Override

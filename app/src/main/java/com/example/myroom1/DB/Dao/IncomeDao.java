@@ -25,7 +25,7 @@ public interface IncomeDao {
     @Query("SELECT * FROM Income WHERE categoryincome_id = :categoryId")
     List<Income> getIncomeByIdCategory(long categoryId);
 
-    @Query("SELECT * FROM Income WHERE date BETWEEN :nowDate AND :toDate")
+    @Query("SELECT * FROM Income WHERE date BETWEEN :toDate AND :nowDate")
     List<Income> getIncomeByMonthOrWeek (long nowDate, long toDate);
 }
 

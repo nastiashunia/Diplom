@@ -99,12 +99,14 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
         int m_week = week.get(Calendar.MONTH);
         int y_week = week.get(Calendar.YEAR);
 
-        mon.add(Calendar.DATE, -(d_now-1));
+        mon.add(Calendar.DATE, -(d_now));
 
         int d_mon = mon.get(Calendar.DAY_OF_MONTH);
+        int m_mon = mon.get(Calendar.MONTH);
+        int y_mon = mon.get(Calendar.YEAR);
 
         week.set(y_week,m_week,d_week,0,0);
-        mon.set(y_now,m_now,d_mon,0,0);
+        mon.set(y_mon,m_mon,d_mon,0,0);
         now.set(y_now,m_now,d_now,0,0);
 
         timeMilli_now = now.getTimeInMillis(); //дата сегодняшняя, до какой даты отсчет

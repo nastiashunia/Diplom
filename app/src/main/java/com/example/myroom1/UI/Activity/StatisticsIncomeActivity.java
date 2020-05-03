@@ -95,12 +95,16 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
 
         week.add(Calendar.DATE, -(d_of_week-1));
 
-        int d_week = mon.get(Calendar.DAY_OF_MONTH);
-        int m_week = mon.get(Calendar.MONTH);
-        int y_week = mon.get(Calendar.YEAR);
+        int d_week = week.get(Calendar.DAY_OF_MONTH);
+        int m_week = week.get(Calendar.MONTH);
+        int y_week = week.get(Calendar.YEAR);
+
+        mon.add(Calendar.DATE, -(d_now-1));
+
+        int d_mon = mon.get(Calendar.DAY_OF_MONTH);
 
         week.set(y_week,m_week,d_week,0,0);
-        mon.set(y_now,m_now,1,0,0);
+        mon.set(y_now,m_now,d_mon,0,0);
         now.set(y_now,m_now,d_now,0,0);
 
         timeMilli_now = now.getTimeInMillis(); //дата сегодняшняя, до какой даты отсчет
@@ -129,7 +133,7 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
 
     public void month(View view) {
         super.onResume();
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_now,timeMilli_month));
+        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_month,timeMilli_now));
         recyclerAdapter.setOnDeleteListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -137,7 +141,7 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
 
     public void week(View view) {
         super.onResume();
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_now,timeMilli_week));
+        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_week, timeMilli_now));
         recyclerAdapter.setOnDeleteListener(this);
         recyclerView.setAdapter(recyclerAdapter);
     }

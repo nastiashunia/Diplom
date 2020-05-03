@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,9 +40,13 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
     RecyclerView recyclerView;
     @BindView(R.id.name_category_search)
     Spinner name_category_search;
+    @BindView(R.id.sum)
+    TextView sum;
     Long idcategory;
     String s;
     String namecategory;
+    Boolean flag;
+    int summa;
 
     private DatabaseHelper databaseHelper;
 
@@ -71,7 +76,7 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 s = parent.getSelectedItem().toString();
                 getNameIdCategory(categoryModels);
-
+                flag = true;
             }
 
             @Override
@@ -118,9 +123,10 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
     @Override
     protected void onResume() {
         super.onResume();
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
+
+       /* SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
         recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(recyclerAdapter);*/
     }
 
 @Override
@@ -129,23 +135,42 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
     }
 
     public void all_category(View view) {
-        //getIncomeByManthOrWeek
+        flag = false;
 
     }
 
     public void month(View view) {
-        super.onResume();
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_month,timeMilli_now));
-        recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);
+        if (flag == true)
+        {   SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory));
+            recyclerAdapter.setOnDeleteListener(this);
+            recyclerView.setAdapter(recyclerAdapter);   }
+        else {
+            SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_month,timeMilli_now));
+            recyclerAdapter.setOnDeleteListener(this);
+            recyclerView.setAdapter(recyclerAdapter);
+        }
+
+
 
     }
 
     public void week(View view) {
-        super.onResume();
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_week, timeMilli_now));
-        recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);
+        if (flag == true)
+        {SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory));
+            recyclerAdapter.setOnDeleteListener(this);
+            recyclerView.setAdapter(recyclerAdapter);
+
+        }
+        else {
+            SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_week, timeMilli_now));
+            recyclerAdapter.setOnDeleteListener(this);
+            recyclerView.setAdapter(recyclerAdapter);
+            summa = databaseHelper.getIncomeDao().getSumOrWeek(timeMilli_week, timeMilli_now);
+            String str = String.valueOf(summa);
+            sum.setText(str);
+        }
+
+
     }
 
     private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
@@ -166,10 +191,9 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
 
         }
     }
+
+    private void R(){
+
+
+    }
 }
-       /* int d = week.get(Calendar.DAY_OF_MONTH);
-        int d_week = week.get(Calendar.DAY_OF_WEEK);
-        week.add(Calendar.DAY_OF_MONTH, -(d_week+1));
-        mon.add(Calendar.DAY_OF_MONTH, -(d-1));
-        d = week.get(Calendar.DAY_OF_MONTH);
-        int dm = mon.get(Calendar.DAY_OF_MONTH);*/

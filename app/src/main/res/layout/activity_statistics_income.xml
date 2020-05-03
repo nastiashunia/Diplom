@@ -21,10 +21,10 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
+>
 
             <TextView
-                android:id="@+id/sum"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Выбор по категории доходов:"
@@ -32,7 +32,7 @@
             <Spinner
                 android:id="@+id/name_category_search"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:text="TextView"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -45,7 +45,9 @@
                 android:layout_height="35dp"
                 android:layout_above="@id/recyclerView"
                 android:onClick="all_category"
-                android:text="Все категории" />
+                android:text="Все категории"
+                android:textSize="14sp"
+                android:textStyle="normal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,8 +64,8 @@
                     android:id="@+id/month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_above="@id/recyclerView"
                     android:layout_weight="1"
+                    android:layout_above="@id/recyclerView"
                     android:onClick="month"
                     android:text="За месяц" />
 
@@ -75,6 +77,30 @@
                     android:layout_weight="1"
                     android:onClick="week"
                     android:text="За неделю" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="4dp"
+
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Сумма:"
+                    />
+                <TextView
+                    android:id="@+id/sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="12" />
+
             </LinearLayout>
         </LinearLayout>
 

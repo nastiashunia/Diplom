@@ -59,6 +59,8 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
         setContentView(R.layout.activity_statistics_income);
         setTitle("Статистика доходов");
 
+
+
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -143,11 +145,19 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
         if (flag == true)
         {   SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory));
             recyclerAdapter.setOnDeleteListener(this);
-            recyclerView.setAdapter(recyclerAdapter);   }
+            recyclerView.setAdapter(recyclerAdapter);
+            summa = databaseHelper.getIncomeDao().getSumByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory);
+            String str = String.valueOf(summa);
+            sum.setText(str);
+        }
         else {
             SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_month,timeMilli_now));
             recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
+
+            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilli_month,timeMilli_now);
+            String str = String.valueOf(summa);
+            sum.setText(str);
         }
 
 
@@ -159,13 +169,15 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
         {SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory));
             recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
-
+            summa = databaseHelper.getIncomeDao().getSumByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory);
+            String str = String.valueOf(summa);
+            sum.setText(str);
         }
         else {
             SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_week, timeMilli_now));
             recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
-            summa = databaseHelper.getIncomeDao().getSumOrWeek(timeMilli_week, timeMilli_now);
+            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilli_week, timeMilli_now);
             String str = String.valueOf(summa);
             sum.setText(str);
         }
@@ -192,8 +204,4 @@ public class StatisticsIncomeActivity extends AppCompatActivity implements SomeI
         }
     }
 
-    private void R(){
-
-
-    }
 }

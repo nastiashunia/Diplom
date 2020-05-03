@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.myroom1.DB.Model.Cost;
-import com.example.myroom1.DB.Model.Income;
+
 
 import java.util.List;
 
@@ -24,6 +24,18 @@ public interface CostDao {
 
     @Query("SELECT * FROM Cost WHERE categorycost_id = :categoryId")
     List<Cost> getCostByIdCategory(long categoryId);
+
+    @Query("SELECT * FROM Cost WHERE date BETWEEN :toDate AND :nowDate")
+    List<Cost> getCostByMonthOrWeek (long toDate, long nowDate);
+
+    @Query("SELECT * FROM Cost WHERE date BETWEEN :toDate AND :nowDate AND categoryCost_id = :category")
+    List<Cost> getCostByMonthOrWeekFromCategory (long toDate, long nowDate, long category);
+
+    @Query("SELECT SUM(sum) FROM Cost WHERE date BETWEEN :toDate AND :nowDate")
+    int getSumAllByMonthOrWeek(long toDate, long nowDate);
+
+    @Query("SELECT SUM(sum) FROM Cost WHERE date BETWEEN :toDate AND :nowDate AND categoryCost_id = :category")
+    int getSumByMonthOrWeekFromCategory(long toDate, long nowDate, long category);
 
 
 }

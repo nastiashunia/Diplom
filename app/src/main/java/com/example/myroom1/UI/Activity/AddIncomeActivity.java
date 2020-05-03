@@ -87,6 +87,7 @@ public class AddIncomeActivity extends AppCompatActivity {
                 c.set(year, month , dayOfMonth, 0 ,0);
                 timeMilli2 = c.getTimeInMillis();
 
+
                 dateT.setText(selectedDate);
                 dateT.setVisibility(View.VISIBLE);
             }});

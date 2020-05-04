@@ -20,6 +20,7 @@ package com.example.myroom1.UI.Activity;
         import com.example.myroom1.R;
         import com.example.myroom1.UI.Activity.adapter.SomeCostRecyclerAdapter;
         import com.example.myroom1.UI.Activity.adapter.SomeIncomeRecyclerAdapter;
+        import com.example.myroom1.UI.Activity.adapter.SomeStatisticsCostRecyclerAdapter;
 
         import java.util.ArrayList;
         import java.util.Calendar;
@@ -28,7 +29,7 @@ package com.example.myroom1.UI.Activity;
         import butterknife.BindView;
         import butterknife.ButterKnife;
 
-public class StatisticsCostActivity extends AppCompatActivity implements SomeCostRecyclerAdapter.OnDeleteListener {
+public class StatisticsCostActivity extends AppCompatActivity/* implements SomeCostRecyclerAdapter.OnDeleteListener*/ {
 
     long timeMilli_month;
     long timeMilli_now;
@@ -122,10 +123,10 @@ public class StatisticsCostActivity extends AppCompatActivity implements SomeCos
         recyclerView.setAdapter(recyclerAdapter);*/
     }
 
-    @Override
+  /*  @Override
     public void onDelete(Cost costModel) {
         databaseHelper.getCostDao().deleteCost(costModel);
-    }
+    }*/
 
     public void all_category(View view) {
         flag = false;
@@ -134,16 +135,16 @@ public class StatisticsCostActivity extends AppCompatActivity implements SomeCos
 
     public void month(View view) {
         if (flag == true)
-        {   SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory));
-            recyclerAdapter.setOnDeleteListener(this);
+        {   SomeStatisticsCostRecyclerAdapter recyclerAdapter = new SomeStatisticsCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory));
+           // recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
             summa = databaseHelper.getCostDao().getSumByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory);
             String str = String.valueOf(summa);
             sum.setText(str);
         }
         else {
-            SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeek(timeMilli_month,timeMilli_now));
-            recyclerAdapter.setOnDeleteListener(this);
+            SomeStatisticsCostRecyclerAdapter recyclerAdapter = new SomeStatisticsCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeek(timeMilli_month,timeMilli_now));
+           /// recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
 
             summa = databaseHelper.getCostDao().getSumAllByMonthOrWeek(timeMilli_month,timeMilli_now);
@@ -157,16 +158,16 @@ public class StatisticsCostActivity extends AppCompatActivity implements SomeCos
 
     public void week(View view) {
         if (flag == true)
-        {SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory));
-            recyclerAdapter.setOnDeleteListener(this);
+        {SomeStatisticsCostRecyclerAdapter recyclerAdapter = new SomeStatisticsCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory));
+            //recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
             summa = databaseHelper.getCostDao().getSumByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory);
             String str = String.valueOf(summa);
             sum.setText(str);
         }
         else {
-            SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeek(timeMilli_week, timeMilli_now));
-            recyclerAdapter.setOnDeleteListener(this);
+            SomeStatisticsCostRecyclerAdapter recyclerAdapter = new SomeStatisticsCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByMonthOrWeek(timeMilli_week, timeMilli_now));
+           // recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
             summa = databaseHelper.getCostDao().getSumAllByMonthOrWeek(timeMilli_week, timeMilli_now);
             String str = String.valueOf(summa);

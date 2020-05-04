@@ -1,36 +1,38 @@
 package com.example.myroom1.UI.Activity.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
+        import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myroom1.App;
-import com.example.myroom1.DB.DatabaseHelper;
-import com.example.myroom1.DB.Model.CategoryIncome;
-import com.example.myroom1.DB.Model.Document;
-import com.example.myroom1.DB.Model.Income;
-import com.example.myroom1.R;
+        import com.example.myroom1.App;
+        import com.example.myroom1.DB.DatabaseHelper;
+        import com.example.myroom1.DB.Model.CategoryIncome;
+        import com.example.myroom1.DB.Model.Document;
+        import com.example.myroom1.DB.Model.Income;
+        import com.example.myroom1.R;
+        import com.example.myroom1.UI.Activity.AddIncomeActivity;
+        import com.example.myroom1.UI.Activity.RedIncomeActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+        import butterknife.BindView;
+        import butterknife.ButterKnife;
 
 
-
-public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class SomeStatisticsIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<Income> incomeModels = new ArrayList<>();
     private List<CategoryIncome> categoryModels = new ArrayList<>();
     private List<Document> documentModels = new ArrayList<>();
     private DatabaseHelper databaseHelper;
-    private OnDeleteListener onDeleteListener;
+
     private Context context;
     Long date;
     Long idcategory;
@@ -38,21 +40,16 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     Long iddocument;
     String namedocument;
 
-    /*private IncomeClickListener listener;
 
-    public interface IncomeClickListener {
-        void onIncomeClick(int position);
-    }*/
-
-    public SomeIncomeRecyclerAdapter(Context context, List<Income> incomeModels/*, IncomeClickListener listener*/) {
+    public SomeStatisticsIncomeRecyclerAdapter(Context context, List<Income> incomeModels) {
         this.context = context;
         this.incomeModels = incomeModels;
-        //this.listener = listener;
+
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_some_income, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_some_statistics_income, parent, false);
         return new NewsViewHolder(view);
     }
 
@@ -74,7 +71,7 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
         viewHolder.commentIncome.setText(incomeModels.get(position).comment);
         viewHolder.sumIncome.setText(String.valueOf(incomeModels.get(position).sum));
-       // viewHolder.categoryIncome.setText(String.valueOf(incomeModels.get(position).categoryIncomeId));
+        // viewHolder.categoryIncome.setText(String.valueOf(incomeModels.get(position).categoryIncomeId));
         viewHolder.categoryIncome.setText(namecategory);
         viewHolder.dateIncome.setText(sDate);
         //viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
@@ -88,8 +85,7 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.delete)
-        public TextView delete;
+
 
         @BindView(R.id.sumIncome)
         public TextView sumIncome;
@@ -105,21 +101,10 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         public NewsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            delete.setOnClickListener(view -> {
-                onDeleteListener.onDelete(incomeModels.get(getAdapterPosition()));
-                incomeModels.remove(getAdapterPosition());
-                notifyItemRemoved(getAdapterPosition());
-            });
         }
     }
 
-    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
-        this.onDeleteListener = onDeleteListener;
-    }
 
-    public interface OnDeleteListener {
-        void onDelete(Income incomeModel);
-    }
 
     private void getNamecategory(List<CategoryIncome> categoryModels){
         for (CategoryIncome c: categoryModels){

@@ -30,7 +30,8 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     private List<CategoryIncome> categoryModels = new ArrayList<>();
     private List<Document> documentModels = new ArrayList<>();
     private DatabaseHelper databaseHelper;
-    private OnDeleteListener onDeleteListener;
+   // private OnDeleteListener onDeleteListener;
+    private OnClickListener onClickListener;
     private Context context;
     Long date;
     Long idcategory;
@@ -86,10 +87,13 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         return incomeModels.size();
     }
 
+
     public class NewsViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.delete)
         public TextView delete;
+        @BindView(R.id.up)
+        public TextView up;
 
         @BindView(R.id.sumIncome)
         public TextView sumIncome;
@@ -106,15 +110,24 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             super(itemView);
             ButterKnife.bind(this, itemView);
             delete.setOnClickListener(view -> {
-                onDeleteListener.onDelete(incomeModels.get(getAdapterPosition()));
+                onClickListener.onDelete(incomeModels.get(getAdapterPosition()));
                 incomeModels.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
+            });
+            up.setOnClickListener(view -> {
+                onClickListener.onUp(incomeModels.get(getAdapterPosition()));
+               // incomeModels.remove(getAdapterPosition());
+                //notifyItemRemoved(getAdapterPosition());
             });
         }
     }
 
-    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
-        this.onDeleteListener = onDeleteListener;
+    public interface OnClickListener {
+        void onDelete(Income incomeModel);
+        void onUp(Income incomeModel);
+    }
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     public interface OnDeleteListener {

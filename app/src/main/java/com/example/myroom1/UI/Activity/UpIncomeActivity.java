@@ -1,12 +1,16 @@
 package com.example.myroom1.UI.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,88 +20,139 @@ import com.example.myroom1.DB.Model.CategoryIncome;
 import com.example.myroom1.DB.Model.Document;
 import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.Spinner;
-import android.widget.Toast;
+import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddIncomeActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+public class UpIncomeActivity extends AppCompatActivity {
     @BindView(R.id.sumIncome)
     EditText sumIncome;
     @BindView(R.id.commentIncome)
     EditText commentIncome;
     @BindView(R.id.dateIncome)
     CalendarView dateIncome;
-   /*@BindView(R.id.documentIncome)
-    EditText documentIncome;*/
-    @BindView(R.id.date)
-    EditText dateT;
 
-    Long date;
+    @BindView(R.id.date)
+    TextView date;
+
+    //Long date;
     long timeMilli2;
     @BindView(R.id.categoryIncome)
     Spinner spinerCategory;
     @BindView(R.id.documentIncome)
     Spinner spinerDocument;
 
-
     private List<Document> documentModels = new ArrayList<>();
     private List<CategoryIncome> categoryModels = new ArrayList<>();
+    Income modelIncome = new Income();
     private DatabaseHelper databaseHelper;
 
     String s;
     String d;
-    long idcategory;
-    long iddocument;
+    Long idcategory;
+    String namecategory;
+    String namedocument;
+    Long iddocument;
     private Context context;
+    Long income;
+    Boolean flag;
+    String selectedDate;
+    int mYear;
+    int mMonth;
+    int mDay;
+    Calendar c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_income);
-        ButterKnife.bind(this);
-        dateIncome = (CalendarView)findViewById(R.id.dateIncome);
-        setTitle("Добавить доход");
+        setContentView(R.layout.activity_up_income);
 
-        dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
+        ButterKnife.bind(this);
+        setTitle("Редактировать доход");
+        Intent intent = getIntent();
+        Bundle arguments = getIntent().getExtras();
+        income = arguments.getLong("incomeid");
+
+        databaseHelper = App.getInstance().getDatabaseInstance();
+        modelIncome = databaseHelper.getIncomeDao().getIncomeById(income);
+        long dateI = modelIncome.date;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        String sDate = sdf.format(dateI);
+        date.setText(sDate);
+        dateIncome = (CalendarView)findViewById(R.id.dateIncome);
+        dateIncome.setVisibility(View.GONE);
+        setTitle("Добавить доход");
+        flag = true;
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+        dateIncome.setVisibility(View.VISIBLE);
+        dateIncome.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
             @Override
-            public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
-                int mYear = year;
-                int mMonth = month;
-                int mDay = dayOfMonth;
+                flag = false;
 
-                String selectedDate = new StringBuilder().append(mDay)
+                mYear = year;
+                mMonth = month;
+                mDay = dayOfMonth;
+
+                selectedDate = new StringBuilder().append(mDay)
                         .append(".").append(mMonth + 1).append(".").append(mYear)
                         .append(" ").toString();
 
                 Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
 
-                date = dateIncome.getDate();
+
                 dateIncome.setVisibility(View.GONE);
-                Calendar c = Calendar.getInstance();
-                c.set(year, month , dayOfMonth, 0 ,0);
-                timeMilli2 = c.getTimeInMillis();
+                /*Calendar c = Calendar.getInstance();
+                c.set(year, month, dayOfMonth, 0, 0);
+                timeMilli2 = c.getTimeInMillis();*/
+                c = Calendar.getInstance();
 
 
-                dateT.setText(selectedDate);
-                dateT.setVisibility(View.VISIBLE);
-            }});
+                //date.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+});
+
+        if (flag == true)
+        {
+            timeMilli2 = modelIncome.date;
+            date.setText(sDate);
+        }
+        else {
+            c.set(mYear,mMonth, mDay, 0, 0);
+            timeMilli2 = c.getTimeInMillis();
+            date.setText(selectedDate);
+        }
+
+        sumIncome.setText(String.valueOf(modelIncome.sum));
+        commentIncome.setText(modelIncome.comment);
+
         databaseHelper = App.getInstance().getDatabaseInstance();
 
         categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
         List<String> strings = getNamesFromListCategory(categoryModels);
+        idcategory = modelIncome.categoryIncomeId;
+        getNamecategory(categoryModels);
+        int index1 = strings.indexOf(namecategory);
+
 
         ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
         spinerCategory.setAdapter(categoryAdapter);
+        spinerCategory.setSelection(index1);
 
         spinerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -116,11 +171,15 @@ public class AddIncomeActivity extends AppCompatActivity {
 
         documentModels = databaseHelper.getDocumentDao().getAllDocument();
         List<String> documents = getNamesFromListDocument(documentModels);
-        documents.add("");
+
+        iddocument = modelIncome.documentId;
+        getNamedocument(documentModels);
+        int index2 = documents.indexOf(namedocument);
+
         ArrayAdapter documentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, documents);
         spinerDocument.setAdapter(documentAdapter);
-        int index2 = documents.indexOf("");
         spinerDocument.setSelection(index2);
+
         spinerDocument.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -134,6 +193,7 @@ public class AddIncomeActivity extends AppCompatActivity {
             }
 
         });
+
     }
 
     private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
@@ -152,6 +212,24 @@ public class AddIncomeActivity extends AppCompatActivity {
                 return;
             }
 
+        }
+    }
+
+    private void getNamecategory(List<CategoryIncome> categoryModels){
+        for (CategoryIncome c: categoryModels){
+            if(idcategory.equals(c.id)){
+                namecategory = c.name;
+                return;
+            }
+        }
+    }
+
+    private void getNamedocument(List<Document> documentModels){
+        for (Document c: documentModels){
+            if(iddocument.equals(c.id)){
+                namedocument = c.name;
+                return;
+            }
         }
     }
 
@@ -180,18 +258,15 @@ public class AddIncomeActivity extends AppCompatActivity {
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
 
         Income model = new Income();
+        model.id = income;
         model.comment = commentIncome.getText().toString();
         model.sum = Integer.parseInt(sumIncome.getText().toString());
         model.date = timeMilli2;
         model.categoryIncomeId = idcategory;
         //model.documentId = Long.parseLong(documentIncome.getText().toString());
-        String k = "";
-        if ("".equals(d)){
-            k = "1";  }
-        else
-        {model.documentId = iddocument;}
+        model.documentId = iddocument;
 
-        databaseHelper.getIncomeDao().insertIncome(model);
+        databaseHelper.getIncomeDao().updateIncome(model);
 
         finish();
     }

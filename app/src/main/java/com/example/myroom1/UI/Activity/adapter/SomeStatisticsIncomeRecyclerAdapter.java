@@ -1,7 +1,6 @@
 package com.example.myroom1.UI.Activity.adapter;
 
         import android.content.Context;
-        import android.content.Intent;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -15,8 +14,6 @@ package com.example.myroom1.UI.Activity.adapter;
         import com.example.myroom1.DB.Model.Document;
         import com.example.myroom1.DB.Model.Income;
         import com.example.myroom1.R;
-        import com.example.myroom1.UI.Activity.AddIncomeActivity;
-        import com.example.myroom1.UI.Activity.RedIncomeActivity;
 
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;

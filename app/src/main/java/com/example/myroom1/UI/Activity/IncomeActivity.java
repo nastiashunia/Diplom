@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.myroom1.DB.DatabaseHelper;
 import com.example.myroom1.DB.Model.CategoryIncome;
-import com.example.myroom1.DB.Model.Document;
 import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
 
@@ -20,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.myroom1.App;
@@ -32,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyclerAdapter.OnDeleteListener {
+public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyclerAdapter.OnClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -104,7 +100,8 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     protected void onResume() {
         super.onResume();
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-        recyclerAdapter.setOnDeleteListener(this);
+       // recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
     }
 
@@ -112,40 +109,31 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     public void onDelete(Income incomeModel) {
         databaseHelper.getIncomeDao().deleteIncome(incomeModel);
     }
+    @Override
+    public void onUp(Income incomeModel) {
+        long i = incomeModel.id;
+        //databaseHelper.getIncomeDao().getIncomeById(i);
+        Intent intent1 = new Intent(this, UpIncomeActivity.class);
+        intent1.putExtra("incomeid",i );
+        startActivity(intent1);
+    }
 
     public void search(View view) {
-       /* namecategory = name_category_search.getText().toString();
-        databaseHelper = App.getInstance().getDatabaseInstance();
-        categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
-        getNameIdCategory(categoryModels);
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
-        recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);*/
 
-       /* SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
-        recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);
-        */
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-        recyclerAdapter.setOnDeleteListener(this);
+       // recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
+
         recyclerView.setAdapter(recyclerAdapter);
 
     }
     public void poisk(){
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
-        recyclerAdapter.setOnDeleteListener(this);
+//        recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
+
         recyclerView.setAdapter(recyclerAdapter);
     }
-
-   /* private void getNameIdCategory(List<CategoryIncome> categoryModels){
-        for (CategoryIncome c: categoryModels){
-            if(namecategory.equals(c.name)){
-                idcategory = c.id;
-                return;
-            }
-
-        }
-    }*/
 
     private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
         List<String> stringList = new ArrayList<>();

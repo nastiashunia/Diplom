@@ -22,16 +22,17 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="commentIncome"
+        android:onClick="onClick"
         android:inputType="textPersonName" />
-    <EditText
+    <TextView
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="commentIncome"
+        android:hint="Выберите дату"
         android:inputType="textPersonName"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
     <CalendarView
         android:id="@+id/dateIncome"
         android:layout_width="match_parent"
@@ -64,5 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:onClick="onSaveClick"
-        android:text="Save" />
+        android:text="Save"
+        android:visibility="visible"
+        />
 </LinearLayout>

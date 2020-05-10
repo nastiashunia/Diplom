@@ -2,9 +2,12 @@ package com.example.myroom1.UI.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 
@@ -22,6 +25,7 @@ import butterknife.OnClick;
 
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -39,7 +43,9 @@ public class AddIncomeActivity extends AppCompatActivity {
    /*@BindView(R.id.documentIncome)
     EditText documentIncome;*/
     @BindView(R.id.date)
-    EditText dateT;
+    TextView dateT;
+    @BindView(R.id.save)
+    Button save;
 
     Long date;
     long timeMilli2;
@@ -58,14 +64,25 @@ public class AddIncomeActivity extends AppCompatActivity {
     long idcategory;
     long iddocument;
     private Context context;
+    int error = -1;
+    boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
         ButterKnife.bind(this);
         dateIncome = (CalendarView)findViewById(R.id.dateIncome);
+        dateIncome.setVisibility(View.GONE);
+       // save.setVisibility(View.GONE);
         setTitle("Добавить доход");
 
+        /*String strsumCost = sumIncome.getText().toString();
+        if(TextUtils.isEmpty(strsumCost)) { sumIncome.setError("Введите сумму дохода в виде цифр"); return; }*/
+
+        dateT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateIncome.setVisibility(View.VISIBLE);
         dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
 
             @Override
@@ -89,8 +106,11 @@ public class AddIncomeActivity extends AppCompatActivity {
 
 
                 dateT.setText(selectedDate);
-                dateT.setVisibility(View.VISIBLE);
+                //dateT.setVisibility(View.VISIBLE);
+                flag = true;
             }});
+            }
+        });
         databaseHelper = App.getInstance().getDatabaseInstance();
 
         categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
@@ -134,6 +154,8 @@ public class AddIncomeActivity extends AppCompatActivity {
             }
 
         });
+
+       // errorSave();
     }
 
     private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
@@ -177,6 +199,47 @@ public class AddIncomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.save)
     public void onSaveClick() {
+       /* DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
+
+        Income model = new Income();
+        model.comment = commentIncome.getText().toString();
+        model.sum = Integer.parseInt(sumIncome.getText().toString());
+        model.date = timeMilli2;
+        model.categoryIncomeId = idcategory;
+        //model.documentId = Long.parseLong(documentIncome.getText().toString());
+        if ("".equals(d)){
+            model.documentId = -1;  }
+        else
+        {model.documentId = iddocument;}
+
+        databaseHelper.getIncomeDao().insertIncome(model);
+
+        finish();*/
+        errorSave();
+    }
+
+   public void errorSave() {
+
+       String strsumCost = sumIncome.getText().toString();
+       if(TextUtils.isEmpty(strsumCost)) { sumIncome.setError("Введите сумму дохода в виде цифр"); return; }
+        if (flag == false){
+            error = 1;
+            showToast();}
+        else enter();
+
+
+    }
+
+    public void showToast() {
+        //создаём и отображаем текстовое уведомление
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Выберите дату!",
+                Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    public void enter(){
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
 
         Income model = new Income();
@@ -185,9 +248,8 @@ public class AddIncomeActivity extends AppCompatActivity {
         model.date = timeMilli2;
         model.categoryIncomeId = idcategory;
         //model.documentId = Long.parseLong(documentIncome.getText().toString());
-        String k = "";
         if ("".equals(d)){
-            k = "1";  }
+            model.documentId = -1;  }
         else
         {model.documentId = iddocument;}
 
@@ -195,6 +257,4 @@ public class AddIncomeActivity extends AppCompatActivity {
 
         finish();
     }
-
-
 }

@@ -4,8 +4,10 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.myroom1.DB.Model.Cost;
+import com.example.myroom1.DB.Model.Income;
 
 
 import java.util.List;
@@ -18,9 +20,14 @@ public interface CostDao {
     @Delete
     void deleteCost(Cost cost);
 
+    @Update
+    void updateCost(Cost cost);
+
+    @Query("SELECT * FROM Cost WHERE id = :costId")
+    Cost getCostById(long costId);
+
     @Query("SELECT * FROM Cost")
     List<Cost> getAllCost();
-
 
     @Query("SELECT * FROM Cost WHERE categorycost_id = :categoryId")
     List<Cost> getCostByIdCategory(long categoryId);

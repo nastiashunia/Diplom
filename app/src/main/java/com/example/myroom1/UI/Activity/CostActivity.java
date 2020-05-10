@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CostActivity extends AppCompatActivity implements SomeCostRecyclerAdapter.OnDeleteListener {
+public class CostActivity extends AppCompatActivity implements SomeCostRecyclerAdapter.OnClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -97,7 +97,7 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
         super.onResume();
 
         SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getAllCost());
-        recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
     }
@@ -107,16 +107,24 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
         databaseHelper.getCostDao().deleteCost(costModel);
     }
 
+    @Override
+    public void onUp(Cost costModel) {
+        long i = costModel.id;
+        Intent intent1 = new Intent(this, UpCostActivity.class);
+        intent1.putExtra("costid",i );
+        startActivity(intent1);
+    }
+
     public void search(View view) {
 
         SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getAllCost());
-        recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
     }
     public void poisk(){
         SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByIdCategory(idcategory));
-        recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
     }
 

@@ -1,129 +1,153 @@
 package com.example.myroom1.UI.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myroom1.App;
 import com.example.myroom1.DB.DatabaseHelper;
 import com.example.myroom1.DB.Model.CategoryCost;
-import com.example.myroom1.DB.Model.Cost;
 import com.example.myroom1.DB.Model.Document;
+import com.example.myroom1.DB.Model.Cost;
 import com.example.myroom1.R;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddCostActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+public class UpCostActivity extends AppCompatActivity {
     @BindView(R.id.sumCost)
     EditText sumCost;
     @BindView(R.id.commentCost)
     EditText commentCost;
     @BindView(R.id.dateCost)
     CalendarView dateCost;
-    @BindView(R.id.date)
-    TextView dateT;
-    @BindView(R.id.save)
-    Button save;
 
-    Long date;
+    @BindView(R.id.date)
+    TextView date;
+
+    //Long date;
     long timeMilli2;
     @BindView(R.id.categoryCost)
     Spinner spinerCategory;
     @BindView(R.id.documentCost)
     Spinner spinerDocument;
 
-
     private List<Document> documentModels = new ArrayList<>();
     private List<CategoryCost> categoryModels = new ArrayList<>();
+    Cost modelCost = new Cost();
     private DatabaseHelper databaseHelper;
 
     String s;
     String d;
-    long idcategory;
-    long iddocument;
+    Long idcategory;
+    String namecategory;
+    String namedocument;
+    Long iddocument;
     private Context context;
-    int error = -1;
-    boolean flag = false;
+    Long cost;
+    Boolean flag;
+    String selectedDate;
+    int mYear;
+    int mMonth;
+    int mDay;
+    Calendar c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_cost);
+        setContentView(R.layout.activity_up_cost);
+
         ButterKnife.bind(this);
+        setTitle("Редактировать доход");
+        Intent intent = getIntent();
+        Bundle arguments = getIntent().getExtras();
+        cost = arguments.getLong("costid");
 
-
-        String strsumCost = sumCost.getText().toString();
-        if(TextUtils.isEmpty(strsumCost)) { sumCost.setError("Введите сумму расхода в виде цифр"); return; }
-
-
-
-
-        setTitle("Добавить расход");
+        databaseHelper = App.getInstance().getDatabaseInstance();
+        modelCost = databaseHelper.getCostDao().getCostById(cost);
+        long dateI = modelCost.date;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        String sDate = sdf.format(dateI);
+        date.setText(sDate);
         dateCost = (CalendarView)findViewById(R.id.dateCost);
-
         dateCost.setVisibility(View.GONE);
-        dateT.setOnClickListener(new View.OnClickListener() {
+        setTitle("Добавить доход");
+        flag = true;
+
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dateCost.setVisibility(View.VISIBLE);
-        dateCost.setOnDateChangeListener(new OnDateChangeListener(){
+                dateCost.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
+                    @Override
+                    public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
 
-                int mYear = year;
-                int mMonth = month;
-                int mDay = dayOfMonth;
+                        flag = false;
 
-                String selectedDate = new StringBuilder().append(mDay)
-                        .append(".").append(mMonth + 1).append(".").append(mYear)
-                        .append(" ").toString();
+                        mYear = year;
+                        mMonth = month;
+                        mDay = dayOfMonth;
 
-                Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
+                        selectedDate = new StringBuilder().append(mDay)
+                                .append(".").append(mMonth + 1).append(".").append(mYear)
+                                .append(" ").toString();
 
-                date = dateCost.getDate();
-                dateCost.setVisibility(View.GONE);
-                Calendar c = Calendar.getInstance();
-                c.set(year, month , dayOfMonth, 0 ,0);
-                timeMilli2 = c.getTimeInMillis();
+                        Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
 
-                dateT.setText(selectedDate);
-                //dateT.setVisibility(View.VISIBLE);
-                flag = true;
-            }});
+
+                        dateCost.setVisibility(View.GONE);
+                        c = Calendar.getInstance();
+                        c.set(year, month, dayOfMonth, 0, 0);
+                        timeMilli2 = c.getTimeInMillis();
+                        c = Calendar.getInstance();
+                        date.setText(selectedDate);
+
+                        //date.setVisibility(View.VISIBLE);
+                    }
+                });
             }
         });
 
+        if (flag == true)
+        {
+            timeMilli2 = modelCost.date;
+            date.setText(sDate);
+        }
+
+        sumCost.setText(String.valueOf(modelCost.sum));
+        commentCost.setText(modelCost.comment);
 
         databaseHelper = App.getInstance().getDatabaseInstance();
 
         categoryModels = databaseHelper.getCategoryCostDao().getAllCategoryCost();
         List<String> strings = getNamesFromListCategory(categoryModels);
+        idcategory = modelCost.categoryCostId;
+        getNamecategory(categoryModels);
+        int index1 = strings.indexOf(namecategory);
+
 
         ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
         spinerCategory.setAdapter(categoryAdapter);
+        spinerCategory.setSelection(index1);
 
         spinerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -135,17 +159,24 @@ public class AddCostActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
 
         });
 
         documentModels = databaseHelper.getDocumentDao().getAllDocument();
         List<String> documents = getNamesFromListDocument(documentModels);
+
+        iddocument = modelCost.documentId;
+        getNamedocument(documentModels);
         documents.add("");
+
+        int index2 = documents.indexOf(namedocument);
+
         ArrayAdapter documentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, documents);
         spinerDocument.setAdapter(documentAdapter);
-        int index2 = documents.indexOf("");
         spinerDocument.setSelection(index2);
+
         spinerDocument.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -159,7 +190,7 @@ public class AddCostActivity extends AppCompatActivity {
             }
 
         });
-        errorSave();
+
     }
 
     private List<String> getNamesFromListCategory(List<CategoryCost> categoryModels){
@@ -175,6 +206,25 @@ public class AddCostActivity extends AppCompatActivity {
         for (CategoryCost c: categoryModels){
             if(s.equals(c.name)){
                 idcategory = c.id;
+                return;
+            }
+
+        }
+    }
+
+    private void getNamecategory(List<CategoryCost> categoryModels){
+        for (CategoryCost c: categoryModels){
+            if(idcategory.equals(c.id)){
+                namecategory = c.name;
+                return;
+            }
+        }
+    }
+
+    private void getNamedocument(List<Document> documentModels){
+        for (Document c: documentModels){
+            if(iddocument.equals(c.id)){
+                namedocument = c.name;
                 return;
             }
         }
@@ -195,6 +245,7 @@ public class AddCostActivity extends AppCompatActivity {
                 iddocument = c.id;
                 return;
             }
+
         }
     }
 
@@ -204,46 +255,21 @@ public class AddCostActivity extends AppCompatActivity {
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
 
         Cost model = new Cost();
+        model.id = cost;
         model.comment = commentCost.getText().toString();
         model.sum = Integer.parseInt(sumCost.getText().toString());
         model.date = timeMilli2;
         model.categoryCostId = idcategory;
         //model.documentId = Long.parseLong(documentCost.getText().toString());
         //model.documentId = iddocument;
-
         if ("".equals(d)){
             model.documentId = -1;  }
         else
         {model.documentId = iddocument;}
-        databaseHelper.getCostDao().insertCost(model);
+        databaseHelper.getCostDao().updateCost(model);
 
         finish();
-    /*    if (flag == true){
-            error = 1;
-            showToast();}*/
     }
 
-    public void errorSave() {
-        if (flag == true){
-            error = 1;
-            showToast();}
-        else save.setVisibility(View.VISIBLE);
-    }
 
-    public void showToast() {
-      //создаём и отображаем текстовое уведомление
-       Toast toast = Toast.makeText(getApplicationContext(),
-              "Пора покормить кота!",
-              Toast.LENGTH_SHORT);
-       toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
-    }
 }
-//    public void showToast() {
-//        //создаём и отображаем текстовое уведомление
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                "Пора покормить кота!",
-//                Toast.LENGTH_SHORT);
-//        toast.setGravity(Gravity.CENTER, 0, 0);
-//        toast.show();
-//    }

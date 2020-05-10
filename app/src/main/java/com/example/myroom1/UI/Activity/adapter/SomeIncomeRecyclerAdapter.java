@@ -30,7 +30,6 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     private List<CategoryIncome> categoryModels = new ArrayList<>();
     private List<Document> documentModels = new ArrayList<>();
     private DatabaseHelper databaseHelper;
-   // private OnDeleteListener onDeleteListener;
     private OnClickListener onClickListener;
     private Context context;
     Long date;
@@ -39,16 +38,11 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     Long iddocument;
     String namedocument;
 
-    /*private IncomeClickListener listener;
 
-    public interface IncomeClickListener {
-        void onIncomeClick(int position);
-    }*/
-
-    public SomeIncomeRecyclerAdapter(Context context, List<Income> incomeModels/*, IncomeClickListener listener*/) {
+    public SomeIncomeRecyclerAdapter(Context context, List<Income> incomeModels) {
         this.context = context;
         this.incomeModels = incomeModels;
-        //this.listener = listener;
+
     }
 
     @Override
@@ -68,10 +62,19 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         databaseHelper = App.getInstance().getDatabaseInstance();
         categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
         getNamecategory(categoryModels);
-
-        iddocument = incomeModels.get(position).documentId;
+        if (incomeModels.get(position).documentId == -1)
+        {
+            viewHolder.documentIncome.setText("");
+        }
+        else {
+            iddocument = incomeModels.get(position).documentId;
+            documentModels = databaseHelper.getDocumentDao().getAllDocument();
+            getNamedocument(documentModels);
+            viewHolder.documentIncome.setText(namedocument);
+        }
+       /* iddocument = incomeModels.get(position).documentId;
         documentModels = databaseHelper.getDocumentDao().getAllDocument();
-        getNamedocument(documentModels);
+        getNamedocument(documentModels);*/
 
         viewHolder.commentIncome.setText(incomeModels.get(position).comment);
         viewHolder.sumIncome.setText(String.valueOf(incomeModels.get(position).sum));
@@ -79,7 +82,7 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         viewHolder.categoryIncome.setText(namecategory);
         viewHolder.dateIncome.setText(sDate);
         //viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
-        viewHolder.documentIncome.setText(namedocument);
+        //viewHolder.documentIncome.setText(namedocument);
     }
 
     @Override
@@ -152,3 +155,10 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
 }
+//MessageDlg('Удалить выбранный файл?',  TMsgDlgType.mtConfirmation, mbYesNo, 0, procedure (const AResult: TModalResult) begin
+//
+//  if (AResult=mrYes) then begin
+//    {тут обрабатываете результат нажатия кнопки "Yes"}
+//  end;
+//
+//end);

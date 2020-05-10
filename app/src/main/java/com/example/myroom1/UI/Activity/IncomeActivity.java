@@ -100,7 +100,6 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     protected void onResume() {
         super.onResume();
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-       // recyclerAdapter.setOnDeleteListener(this);
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
     }
@@ -112,7 +111,6 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     @Override
     public void onUp(Income incomeModel) {
         long i = incomeModel.id;
-        //databaseHelper.getIncomeDao().getIncomeById(i);
         Intent intent1 = new Intent(this, UpIncomeActivity.class);
         intent1.putExtra("incomeid",i );
         startActivity(intent1);
@@ -121,15 +119,12 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     public void search(View view) {
 
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-       // recyclerAdapter.setOnDeleteListener(this);
         recyclerAdapter.setOnClickListener(this);
-
         recyclerView.setAdapter(recyclerAdapter);
 
     }
     public void poisk(){
         SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
-//        recyclerAdapter.setOnDeleteListener(this);
         recyclerAdapter.setOnClickListener(this);
 
         recyclerView.setAdapter(recyclerAdapter);

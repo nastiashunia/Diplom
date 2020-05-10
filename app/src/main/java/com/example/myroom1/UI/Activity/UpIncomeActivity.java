@@ -69,6 +69,7 @@ public class UpIncomeActivity extends AppCompatActivity {
     int mMonth;
     int mDay;
     Calendar c;
+    String sDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class UpIncomeActivity extends AppCompatActivity {
         modelIncome = databaseHelper.getIncomeDao().getIncomeById(income);
         long dateI = modelIncome.date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        String sDate = sdf.format(dateI);
+        sDate = sdf.format(dateI);
         date.setText(sDate);
         dateIncome = (CalendarView)findViewById(R.id.dateIncome);
         dateIncome.setVisibility(View.GONE);
@@ -93,7 +94,7 @@ public class UpIncomeActivity extends AppCompatActivity {
         flag = true;
 
         date.setOnClickListener(new View.OnClickListener() {
-            @Override
+        @Override
         public void onClick(View v) {
         dateIncome.setVisibility(View.VISIBLE);
         dateIncome.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -115,12 +116,13 @@ public class UpIncomeActivity extends AppCompatActivity {
 
 
                 dateIncome.setVisibility(View.GONE);
-                /*Calendar c = Calendar.getInstance();
-                c.set(year, month, dayOfMonth, 0, 0);
-                timeMilli2 = c.getTimeInMillis();*/
+                //Calendar c = Calendar.getInstance();
                 c = Calendar.getInstance();
+                c.set(year, month, dayOfMonth, 0, 0);
+                timeMilli2 = c.getTimeInMillis();
 
-
+                date.setText(selectedDate);
+                //GetDate(flag);
                 //date.setVisibility(View.VISIBLE);
             }
         });
@@ -132,11 +134,11 @@ public class UpIncomeActivity extends AppCompatActivity {
             timeMilli2 = modelIncome.date;
             date.setText(sDate);
         }
-        else {
+       /* else {
             c.set(mYear,mMonth, mDay, 0, 0);
             timeMilli2 = c.getTimeInMillis();
             date.setText(selectedDate);
-        }
+        }*/
 
         sumIncome.setText(String.valueOf(modelIncome.sum));
         commentIncome.setText(modelIncome.comment);
@@ -174,6 +176,7 @@ public class UpIncomeActivity extends AppCompatActivity {
 
         iddocument = modelIncome.documentId;
         getNamedocument(documentModels);
+        documents.add("");
         int index2 = documents.indexOf(namedocument);
 
         ArrayAdapter documentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, documents);
@@ -256,7 +259,6 @@ public class UpIncomeActivity extends AppCompatActivity {
     @OnClick(R.id.save)
     public void onSaveClick() {
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
-
         Income model = new Income();
         model.id = income;
         model.comment = commentIncome.getText().toString();
@@ -264,8 +266,11 @@ public class UpIncomeActivity extends AppCompatActivity {
         model.date = timeMilli2;
         model.categoryIncomeId = idcategory;
         //model.documentId = Long.parseLong(documentIncome.getText().toString());
-        model.documentId = iddocument;
-
+        //model.documentId = iddocument;
+        if ("".equals(d)){
+            model.documentId = -1;  }
+        else
+        {model.documentId = iddocument;}
         databaseHelper.getIncomeDao().updateIncome(model);
 
         finish();

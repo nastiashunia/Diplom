@@ -27,6 +27,7 @@
         <activity android:name=".UI.Activity.StatisticsIncomeActivity" />
         <activity android:name=".UI.Activity.StatisticsCostActivity" />
         <activity android:name=".UI.Activity.UpIncomeActivity" />
+        <activity android:name=".UI.Activity.UpCostActivity" />
     </application>
 
 </manifest>

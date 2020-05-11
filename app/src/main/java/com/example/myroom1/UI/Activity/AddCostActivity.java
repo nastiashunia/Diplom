@@ -74,8 +74,7 @@ public class AddCostActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        String strsumCost = sumCost.getText().toString();
-        if(TextUtils.isEmpty(strsumCost)) { sumCost.setError("Введите сумму расхода в виде цифр"); return; }
+
 
 
 
@@ -201,6 +200,31 @@ public class AddCostActivity extends AppCompatActivity {
 
     @OnClick(R.id.save)
     public void onSaveClick() {
+        errorSave();
+    }
+
+    public void errorSave() {
+
+        String strsumCost = sumCost.getText().toString();
+        if(TextUtils.isEmpty(strsumCost)) { sumCost.setError("Введите сумму расхода в виде цифр"); return; }
+        if (flag == false){
+            error = 1;
+            showToast();}
+        else enter();
+
+
+    }
+
+    public void showToast() {
+      //создаём и отображаем текстовое уведомление
+       Toast toast = Toast.makeText(getApplicationContext(),
+              "Выберите дату!",
+              Toast.LENGTH_SHORT);
+       toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    public void enter(){
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
 
         Cost model = new Cost();
@@ -218,25 +242,6 @@ public class AddCostActivity extends AppCompatActivity {
         databaseHelper.getCostDao().insertCost(model);
 
         finish();
-    /*    if (flag == true){
-            error = 1;
-            showToast();}*/
-    }
-
-    public void errorSave() {
-        if (flag == true){
-            error = 1;
-            showToast();}
-        else save.setVisibility(View.VISIBLE);
-    }
-
-    public void showToast() {
-      //создаём и отображаем текстовое уведомление
-       Toast toast = Toast.makeText(getApplicationContext(),
-              "Пора покормить кота!",
-              Toast.LENGTH_SHORT);
-       toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 }
 //    public void showToast() {

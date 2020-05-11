@@ -66,5 +66,5 @@
         android:layout_marginTop="10dp"
         android:onClick="onSaveClick"
         android:text="Save"
-        android:visibility="invisible"/>
+        />
 </LinearLayout>

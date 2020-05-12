@@ -53,23 +53,23 @@
                 android:text="TextView" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="[UP]"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <TextView
+        <ImageButton
             android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#F5F5F5"
             android:padding="10dp"
-            android:text="[X]"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_error" />
+
+        <ImageButton
+            android:id="@+id/up"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#F5F5F5"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/pen" />
     </LinearLayout>
 
 </LinearLayout>

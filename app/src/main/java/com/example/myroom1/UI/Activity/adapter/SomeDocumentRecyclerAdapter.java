@@ -4,12 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myroom1.DB.DatabaseHelper;
 import com.example.myroom1.DB.Model.Document;
+import com.example.myroom1.DB.Model.Income;
 import com.example.myroom1.R;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +30,7 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
     private DatabaseHelper databaseHelper;
 
     private OnDeleteListener onDeleteListener;
+    private OnClickListener onClickListener;
     private Context context;
     Long date_start;
     Long date_finish;
@@ -51,7 +55,7 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
 
         date_finish=documentModels.get(position).finish_date;
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.yyyy");
-        String fDate = sdf1.format(date_start);
+        String fDate = sdf1.format(date_finish);
        // viewHolder.commentIncome.setText(documentModels.get(position).name);
 
         viewHolder.name_document.setText(documentModels.get(position).name);
@@ -67,7 +71,9 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
     public class NewsViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.delete)
-        public TextView delete;
+        public ImageButton delete;
+        @BindView(R.id.up)
+        public ImageButton up;
 
         @BindView(R.id.date_start_document)
         public TextView date_start_document;
@@ -81,12 +87,25 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
             super(itemView);
             ButterKnife.bind(this, itemView);
             delete.setOnClickListener(view -> {
-                onDeleteListener.onDelete(documentModels.get(getAdapterPosition()));
+                onClickListener.onDelete(documentModels.get(getAdapterPosition()));
                 documentModels.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
             });
+            up.setOnClickListener(view -> {
+                onClickListener.onUp(documentModels.get(getAdapterPosition()));
+                // incomeModels.remove(getAdapterPosition());
+                //notifyItemRemoved(getAdapterPosition());
+            });
         }
     }
+    public interface OnClickListener {
+        void onDelete(Document documentModel);
+        void onUp(Document documentModel);
+    }
+    public void setOnClickListener(SomeDocumentRecyclerAdapter.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
 
     public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
         this.onDeleteListener = onDeleteListener;

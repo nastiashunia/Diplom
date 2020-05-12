@@ -4,8 +4,10 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.myroom1.DB.Model.Document;
+import com.example.myroom1.DB.Model.Income;
 
 import java.util.List;
 
@@ -16,6 +18,9 @@ public interface DocumentDao {
 
     @Delete
     void deleteDocument(Document document);
+
+    @Update
+    void updateDocument (Document document);
 
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();

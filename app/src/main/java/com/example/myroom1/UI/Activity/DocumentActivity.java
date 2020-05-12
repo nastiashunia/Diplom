@@ -23,7 +23,7 @@ import com.example.myroom1.UI.Activity.adapter.SomeIncomeRecyclerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DocumentActivity extends AppCompatActivity implements SomeDocumentRecyclerAdapter.OnDeleteListener {
+public class DocumentActivity extends AppCompatActivity implements SomeDocumentRecyclerAdapter.OnClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -64,7 +64,7 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
         super.onResume();
 
         SomeDocumentRecyclerAdapter recyclerAdapter = new SomeDocumentRecyclerAdapter(this, databaseHelper.getDocumentDao().getAllDocument());
-        recyclerAdapter.setOnDeleteListener(this);
+        recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
     }
@@ -72,5 +72,13 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
     @Override
     public void onDelete(Document documentModel) {
         databaseHelper.getDocumentDao().deleteDocument(documentModel);
+    }
+
+    @Override
+    public void onUp(Document documentModel) {
+        long i = documentModel.id;
+        Intent intent1 = new Intent(this, UpDocumentActivity.class);
+        intent1.putExtra("documentid",i );
+        startActivity(intent1);
     }
 }

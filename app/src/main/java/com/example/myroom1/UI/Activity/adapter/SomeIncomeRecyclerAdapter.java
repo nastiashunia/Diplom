@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -94,9 +95,9 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public class NewsViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.delete)
-        public TextView delete;
+        public ImageButton delete;
         @BindView(R.id.up)
-        public TextView up;
+        public ImageButton up;
 
         @BindView(R.id.sumIncome)
         public TextView sumIncome;

@@ -3,6 +3,8 @@ package com.example.myroom1.UI.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -124,6 +126,7 @@ public class UpIncomeActivity extends AppCompatActivity {
                 date.setText(selectedDate);
                 //GetDate(flag);
                 //date.setVisibility(View.VISIBLE);
+                //flag = true;
             }
         });
     }
@@ -258,6 +261,10 @@ public class UpIncomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.save)
     public void onSaveClick() {
+
+        String strsumCost = sumIncome.getText().toString();
+        if(TextUtils.isEmpty(strsumCost)) { sumIncome.setError("Введите сумму дохода в виде цифр"); return; }
+
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
         Income model = new Income();
         model.id = income;
@@ -265,8 +272,6 @@ public class UpIncomeActivity extends AppCompatActivity {
         model.sum = Integer.parseInt(sumIncome.getText().toString());
         model.date = timeMilli2;
         model.categoryIncomeId = idcategory;
-        //model.documentId = Long.parseLong(documentIncome.getText().toString());
-        //model.documentId = iddocument;
         if ("".equals(d)){
             model.documentId = -1;  }
         else

@@ -136,7 +136,7 @@ public class AddIncomeActivity extends AppCompatActivity {
 
         documentModels = databaseHelper.getDocumentDao().getAllDocument();
         List<String> documents = getNamesFromListDocument(documentModels);
-        documents.add("");
+       // documents.add("");
         ArrayAdapter documentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, documents);
         spinerDocument.setAdapter(documentAdapter);
         int index2 = documents.indexOf("");
@@ -179,10 +179,11 @@ public class AddIncomeActivity extends AppCompatActivity {
 
     private List<String> getNamesFromListDocument(List<Document> documentModels){
         List<String> stringList = new ArrayList<>();
-
+        stringList.add("");
         for (Document c: documentModels){
             stringList.add(c.name);
         }
+
         return stringList;
     }
 
@@ -199,22 +200,6 @@ public class AddIncomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.save)
     public void onSaveClick() {
-       /* DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
-
-        Income model = new Income();
-        model.comment = commentIncome.getText().toString();
-        model.sum = Integer.parseInt(sumIncome.getText().toString());
-        model.date = timeMilli2;
-        model.categoryIncomeId = idcategory;
-        //model.documentId = Long.parseLong(documentIncome.getText().toString());
-        if ("".equals(d)){
-            model.documentId = -1;  }
-        else
-        {model.documentId = iddocument;}
-
-        databaseHelper.getIncomeDao().insertIncome(model);
-
-        finish();*/
         errorSave();
     }
 
@@ -226,8 +211,6 @@ public class AddIncomeActivity extends AppCompatActivity {
             error = 1;
             showToast();}
         else enter();
-
-
     }
 
     public void showToast() {
@@ -247,7 +230,6 @@ public class AddIncomeActivity extends AppCompatActivity {
         model.sum = Integer.parseInt(sumIncome.getText().toString());
         model.date = timeMilli2;
         model.categoryIncomeId = idcategory;
-        //model.documentId = Long.parseLong(documentIncome.getText().toString());
         if ("".equals(d)){
             model.documentId = -1;  }
         else

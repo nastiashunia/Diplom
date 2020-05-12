@@ -3,6 +3,7 @@ package com.example.myroom1.UI.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -252,6 +253,10 @@ public class UpCostActivity extends AppCompatActivity {
 
     @OnClick(R.id.save)
     public void onSaveClick() {
+
+        String strsumCost = sumCost.getText().toString();
+        if(TextUtils.isEmpty(strsumCost)) { sumCost.setError("Введите сумму расхода в виде цифр"); return; }
+
         DatabaseHelper databaseHelper = App.getInstance().getDatabaseInstance();
 
         Cost model = new Cost();
@@ -260,8 +265,6 @@ public class UpCostActivity extends AppCompatActivity {
         model.sum = Integer.parseInt(sumCost.getText().toString());
         model.date = timeMilli2;
         model.categoryCostId = idcategory;
-        //model.documentId = Long.parseLong(documentCost.getText().toString());
-        //model.documentId = iddocument;
         if ("".equals(d)){
             model.documentId = -1;  }
         else

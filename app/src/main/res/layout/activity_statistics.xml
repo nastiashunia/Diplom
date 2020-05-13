@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/kr"
+        android:src="@drawable/money2"
         android:scaleType="fitXY"/>
 
     <LinearLayout
@@ -24,26 +24,26 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#4CAF50"
-            android:layout_gravity="center_horizontal"
+            android:background="#00FF00"
+            android:onClick="income"
             android:scrollbarDefaultDelayBeforeFade="400"
             android:scrollbarFadeDuration="250"
             android:text="Cтатистика по доходам"
-            android:onClick="income"
             android:textColorHint="#29AF2E" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#4CAF50"
-            android:text="Cтатистика по расходам"
-            android:onClick="cost"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#00FF00"
+            android:onClick="cost"
+            android:text="Cтатистика по расходам" />
 
 
     </LinearLayout>

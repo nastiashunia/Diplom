@@ -8,8 +8,9 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/kr"
-        android:scaleType="fitXY"/>
+        android:src="@drawable/money2"
+        android:scaleType="fitXY"
+        android:alpha="0.7"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,15 +25,16 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#4CAF50"
-            android:layout_gravity="center_horizontal"
+            android:background="#00FF00"
+            android:onClick="addi"
             android:scrollbarDefaultDelayBeforeFade="400"
             android:scrollbarFadeDuration="250"
             android:text="Доходы"
-            android:onClick="addi"
-            android:textColorHint="#29AF2E" />
+            android:textColorHint="#29AF2E"
+             />
 
         <Button
             android:id="@+id/button4"
@@ -41,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#4CAF50"
+            android:background="#00FF00"
             android:text="Расходы"
             android:onClick="adds"/>
         <Button
@@ -51,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#4CAF50"
+            android:background="#00FF00"
             android:text="Документы"
             android:onClick="doc"/>
         <Button
@@ -61,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#4CAF50"
+            android:background="#00FF00"
             android:text="Статистика"
             android:onClick="statistics"/>
 

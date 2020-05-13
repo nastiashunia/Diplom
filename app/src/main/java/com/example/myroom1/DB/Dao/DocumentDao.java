@@ -22,6 +22,9 @@ public interface DocumentDao {
     @Update
     void updateDocument (Document document);
 
+    @Query("SELECT * FROM Document WHERE id = :documentId")
+    Document getDocumentById(long documentId);
+
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();
 

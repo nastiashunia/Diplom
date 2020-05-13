@@ -1,10 +1,12 @@
 package com.example.myroom1.UI.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -16,6 +18,8 @@ import com.example.myroom1.R;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.example.myroom1.App;
 import com.example.myroom1.UI.Activity.adapter.SomeDocumentRecyclerAdapter;
 import com.example.myroom1.UI.Activity.adapter.SomeIncomeRecyclerAdapter;
@@ -71,7 +75,27 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
 
     @Override
     public void onDelete(Document documentModel) {
-        databaseHelper.getDocumentDao().deleteDocument(documentModel);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        String yes = "Удалить документ";
+        String no = "Отмена";
+        alert.setTitle("Удалить");
+        alert.setMessage("Вы действительно хотите удалить эту запись?");
+        alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                databaseHelper.getDocumentDao().deleteDocument(documentModel);
+                Toast.makeText(getApplicationContext(), "Запись удалена", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                }
+        );
+        alert.show();
     }
 
     @Override

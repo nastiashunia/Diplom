@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="sumIncome"
+            android:hint="Сумма дохода"
             android:inputType="number" />
 
         <EditText
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="commentIncome"
+            android:hint="Комментарий"
             android:inputType="textPersonName" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Date"
+            android:hint="Выберите дату"
             android:visibility="visible"
             android:onClick="onClick"
             android:inputType="textPersonName"/>
@@ -69,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="onSaveClick"
-            android:text="Save" />
+            android:text="Сохранить"
+            android:background="#00FF00"/>
     </LinearLayout>
 

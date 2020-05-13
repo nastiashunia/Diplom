@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="search"
                 android:text="Поиск по всем"
+                android:background="#00FF00"
                 android:layout_above ="@id/recyclerView"/>
         </LinearLayout>
 

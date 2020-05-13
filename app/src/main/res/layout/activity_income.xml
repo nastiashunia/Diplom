@@ -30,8 +30,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-/>
+                android:layout_marginBottom="4dp"/>
 
             <Button
                 android:id="@+id/search"
@@ -39,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="search"
                 android:text="Поиск по всем"
+                android:background="#00FF00"
                 android:layout_above ="@id/recyclerView"/>
         </LinearLayout>
 

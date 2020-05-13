@@ -1,12 +1,15 @@
 package com.example.myroom1.UI.Activity.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myroom1.App;
@@ -117,7 +120,9 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
                 onClickListener.onDelete(incomeModels.get(getAdapterPosition()));
                 incomeModels.remove(getAdapterPosition());
                 notifyItemRemoved(getAdapterPosition());
-            });
+            }
+
+            );
             up.setOnClickListener(view -> {
                 onClickListener.onUp(incomeModels.get(getAdapterPosition()));
                // incomeModels.remove(getAdapterPosition());
@@ -130,13 +135,14 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         void onDelete(Income incomeModel);
         void onUp(Income incomeModel);
     }
-    public void setOnClickListener(OnClickListener onClickListener) {
+    public void setOnClickListener(SomeIncomeRecyclerAdapter.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
-
-    public interface OnDeleteListener {
-        void onDelete(Income incomeModel);
-    }
+/*
+    public  void  f(Income incomeModel) {
+        incomeModels.remove(incomeModel);
+        notifyItemRemoved(incomeModel);
+    }*/
 
     private void getNamecategory(List<CategoryIncome> categoryModels){
         for (CategoryIncome c: categoryModels){
@@ -156,10 +162,3 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
 }
-//MessageDlg('Удалить выбранный файл?',  TMsgDlgType.mtConfirmation, mbYesNo, 0, procedure (const AResult: TModalResult) begin
-//
-//  if (AResult=mrYes) then begin
-//    {тут обрабатываете результат нажатия кнопки "Yes"}
-//  end;
-//
-//end);

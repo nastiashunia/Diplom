@@ -1,9 +1,11 @@
 package com.example.myroom1.UI.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.myroom1.DB.DatabaseHelper;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.myroom1.App;
 import com.example.myroom1.UI.Activity.adapter.SomeIncomeRecyclerAdapter;
@@ -106,8 +109,30 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
 
     @Override
     public void onDelete(Income incomeModel) {
-        databaseHelper.getIncomeDao().deleteIncome(incomeModel);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        String yes = "Удалить доход";
+        String no = "Отмена";
+        alert.setTitle("Удалить");
+        alert.setMessage("Вы действительно хотите удалить эту запись?");
+        alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                databaseHelper.getIncomeDao().deleteIncome(incomeModel);
+
+                Toast.makeText(getApplicationContext(), "Запись удалена", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                }
+        );
+        alert.show();
     }
+
     @Override
     public void onUp(Income incomeModel) {
         long i = incomeModel.id;

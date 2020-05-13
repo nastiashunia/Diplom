@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="commentIncome"
+            android:hint="Дата начала действия документа"
             android:inputType="textPersonName"
             android:visibility="visible" />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="commentIncome"
+            android:hint="Дата окончания действия документа"
             android:inputType="textPersonName"
             android:visibility="visible" />
 
@@ -62,7 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="onSaveClick"
-            android:text="Save" />
+            android:text="Сохранить"
+            android:background="#00FF00"
+            />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

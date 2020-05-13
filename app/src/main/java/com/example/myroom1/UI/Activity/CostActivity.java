@@ -1,8 +1,11 @@
 package com.example.myroom1.UI.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import com.example.myroom1.DB.DatabaseHelper;
 import com.example.myroom1.DB.Model.CategoryCost;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.myroom1.App;
 import com.example.myroom1.UI.Activity.adapter.SomeCostRecyclerAdapter;
@@ -104,7 +108,28 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
 
     @Override
     public void onDelete(Cost costModel) {
-        databaseHelper.getCostDao().deleteCost(costModel);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        String yes = "Удалить расход";
+        String no = "Отмена";
+        alert.setTitle("Удалить");
+        alert.setMessage("Вы действительно хотите удалить эту запись?");
+        alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                databaseHelper.getCostDao().deleteCost(costModel);
+                Toast.makeText(getApplicationContext(), "Запись удалена", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close dialog
+                        dialog.cancel();
+                    }
+                }
+        );
+        alert.show();
+
     }
 
     @Override

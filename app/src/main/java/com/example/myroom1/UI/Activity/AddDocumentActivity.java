@@ -138,7 +138,16 @@ public class AddDocumentActivity extends AppCompatActivity {
             showToast();}
         else {if (flag1 == false ){
             showToast();}
-        else enter();}
+        else if (timeMilliStart > timeMilliFinish)
+        {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Дата начала больше даты окончания срока действия документа!",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+        else
+            enter();}
     }
 
     /*public void errorSave() {

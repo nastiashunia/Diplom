@@ -47,7 +47,8 @@
                 android:onClick="all_category"
                 android:text="Все категории"
                 android:textSize="14sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:background="#00FF00"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +68,8 @@
                     android:layout_weight="1"
                     android:layout_above="@id/recyclerView"
                     android:onClick="month"
-                    android:text="За месяц" />
+                    android:text="За месяц"
+                    android:background="#00FF00"/>
 
                 <Button
                     android:id="@+id/week"
@@ -76,7 +78,8 @@
                     android:layout_above="@id/recyclerView"
                     android:layout_weight="1"
                     android:onClick="week"
-                    android:text="За неделю" />
+                    android:text="За неделю"
+                    android:background="#00FF00"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

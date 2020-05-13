@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="sumIncome"
+        android:hint="Сумма дохода"
+        android:textSize="20sp"
         android:inputType="number" />
 
     <EditText
@@ -21,18 +22,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="commentIncome"
+        android:hint="Комментарий"
         android:onClick="onClick"
+        android:textSize="20sp"
         android:inputType="textPersonName" />
+
     <TextView
         android:id="@+id/date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Выберите дату"
         android:inputType="textPersonName"
-        android:visibility="visible"/>
+        android:textSize="20sp"
+        android:visibility="visible" />
     <CalendarView
         android:id="@+id/dateIncome"
         android:layout_width="match_parent"
@@ -49,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:textSize="20sp"
  />
 
     <Spinner
@@ -57,6 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:textSize="20sp"
         />
 
     <Button
@@ -65,7 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:onClick="onSaveClick"
-        android:text="Save"
+        android:text="Сохранить"
         android:visibility="visible"
+        android:background="#00FF00"
+
         />
 </LinearLayout>

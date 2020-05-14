@@ -32,6 +32,7 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    SomeDocumentRecyclerAdapter recyclerAdapter;
     private DatabaseHelper databaseHelper;
 
 
@@ -67,7 +68,7 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
     protected void onResume() {
         super.onResume();
 
-        SomeDocumentRecyclerAdapter recyclerAdapter = new SomeDocumentRecyclerAdapter(this, databaseHelper.getDocumentDao().getAllDocument());
+         recyclerAdapter = new SomeDocumentRecyclerAdapter(this, databaseHelper.getDocumentDao().getAllDocument());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -85,6 +86,7 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
             public void onClick(DialogInterface dialog, int which) {
 
                 databaseHelper.getDocumentDao().deleteDocument(documentModel);
+                recyclerAdapter.f();
                 Toast.makeText(getApplicationContext(), "Запись удалена", Toast.LENGTH_SHORT).show();
             }
         });

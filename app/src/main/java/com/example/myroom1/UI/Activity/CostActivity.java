@@ -43,7 +43,7 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
     String s;
     String namecategory;
     Boolean flag;
-
+    SomeCostRecyclerAdapter recyclerAdapter;
     private List<CategoryCost> categoryModels = new ArrayList<>();
 
     @Override
@@ -100,7 +100,7 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
     protected void onResume() {
         super.onResume();
 
-        SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getAllCost());
+         recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getAllCost());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -118,6 +118,7 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
             public void onClick(DialogInterface dialog, int which) {
 
                 databaseHelper.getCostDao().deleteCost(costModel);
+                recyclerAdapter.f();
                 Toast.makeText(getApplicationContext(), "Запись удалена", Toast.LENGTH_SHORT).show();
             }
         });
@@ -142,13 +143,13 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
 
     public void search(View view) {
 
-        SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getAllCost());
+         recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getAllCost());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
     }
     public void poisk(){
-        SomeCostRecyclerAdapter recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByIdCategory(idcategory));
+         recyclerAdapter = new SomeCostRecyclerAdapter(this, databaseHelper.getCostDao().getCostByIdCategory(idcategory));
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
     }

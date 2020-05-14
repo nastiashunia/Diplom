@@ -29,7 +29,7 @@ public class SomeCostRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private List<Document> documentModels = new ArrayList<>();
     private DatabaseHelper databaseHelper;
     private OnClickListener onClickListener;
-
+int i;
     //private OnDeleteListener onDeleteListener;
     private Context context;
 
@@ -111,8 +111,9 @@ public class SomeCostRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             ButterKnife.bind(this, itemView);
             delete.setOnClickListener(view -> {
                 onClickListener.onDelete(costModels.get(getAdapterPosition()));
-                costModels.remove(getAdapterPosition());
-                notifyItemRemoved(getAdapterPosition());
+                 i = getAdapterPosition();
+                //costModels.remove(getAdapterPosition());
+                //notifyItemRemoved(getAdapterPosition());
             });
             up.setOnClickListener(view -> {
                 onClickListener.onUp(costModels.get(getAdapterPosition()));
@@ -130,8 +131,9 @@ public class SomeCostRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         this.onClickListener = onClickListener;
     }
 
-    public interface OnDeleteListener {
-        void onDelete(Income incomeModel);
+    public  void  f() {
+        costModels.remove(i);
+        notifyItemRemoved(i);
     }
 
     private void getNamecategory(List<CategoryCost> categoryModels){

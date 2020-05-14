@@ -42,7 +42,7 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     String s;
     String namecategory;
     Boolean flag;
-
+    SomeIncomeRecyclerAdapter recyclerAdapter;
     private DatabaseHelper databaseHelper;
 
     private List<CategoryIncome> categoryModels = new ArrayList<>();
@@ -102,7 +102,7 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     @Override
     protected void onResume() {
         super.onResume();
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
+        recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
     }
@@ -119,6 +119,7 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
             public void onClick(DialogInterface dialog, int which) {
 
                 databaseHelper.getIncomeDao().deleteIncome(incomeModel);
+                recyclerAdapter.f();
 
                 Toast.makeText(getApplicationContext(), "Запись удалена", Toast.LENGTH_SHORT).show();
             }
@@ -143,13 +144,13 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
 
     public void search(View view) {
 
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
+         recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
     }
     public void poisk(){
-        SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
+         recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
         recyclerAdapter.setOnClickListener(this);
 
         recyclerView.setAdapter(recyclerAdapter);

@@ -42,6 +42,7 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     Long iddocument;
     String namedocument;
 
+    int i;
 
     public SomeIncomeRecyclerAdapter(Context context, List<Income> incomeModels) {
         this.context = context;
@@ -118,8 +119,9 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             ButterKnife.bind(this, itemView);
             delete.setOnClickListener(view -> {
                 onClickListener.onDelete(incomeModels.get(getAdapterPosition()));
-                incomeModels.remove(getAdapterPosition());
-                notifyItemRemoved(getAdapterPosition());
+                i = getAdapterPosition();
+                //incomeModels.remove(getAdapterPosition());
+                //notifyItemRemoved(getAdapterPosition());
             }
 
             );
@@ -138,11 +140,11 @@ public class SomeIncomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     public void setOnClickListener(SomeIncomeRecyclerAdapter.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
-/*
-    public  void  f(Income incomeModel) {
-        incomeModels.remove(incomeModel);
-        notifyItemRemoved(incomeModel);
-    }*/
+
+    public  void  f() {
+        incomeModels.remove(i);
+        notifyItemRemoved(i);
+    }
 
     private void getNamecategory(List<CategoryIncome> categoryModels){
         for (CategoryIncome c: categoryModels){

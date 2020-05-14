@@ -28,6 +28,9 @@ public interface DocumentDao {
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();
 
+    @Query("SELECT * FROM document WHERE finish_date BETWEEN :dateStart AND :dateFinish")
+    List<Document> getAllDocumentDateFinish( long dateStart, long dateFinish);
+
     /*@Query("SELECT Document.name FROM document WHERE id = :documentId")
     Document getByIdDocument(long documentId);*/
 }

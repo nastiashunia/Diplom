@@ -34,7 +34,7 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
     private Context context;
     Long date_start;
     Long date_finish;
-
+int i;
     public SomeDocumentRecyclerAdapter(Context context, List<Document> documentModels) {
         this.context = context;
         this.documentModels = documentModels;
@@ -88,8 +88,9 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
             ButterKnife.bind(this, itemView);
             delete.setOnClickListener(view -> {
                 onClickListener.onDelete(documentModels.get(getAdapterPosition()));
-                documentModels.remove(getAdapterPosition());
-                notifyItemRemoved(getAdapterPosition());
+                i = getAdapterPosition();
+             //   documentModels.remove(getAdapterPosition());
+              //  notifyItemRemoved(getAdapterPosition());
             });
             up.setOnClickListener(view -> {
                 onClickListener.onUp(documentModels.get(getAdapterPosition()));
@@ -115,6 +116,10 @@ public class SomeDocumentRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
         void onDelete(Document documentModel);
     }
 
+    public  void  f() {
+        documentModels.remove(i);
+        notifyItemRemoved(i);
+    }
 
 
 }

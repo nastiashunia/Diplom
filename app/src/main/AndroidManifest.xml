@@ -3,32 +3,32 @@
     package="com.example.myroom1">
 
     <application
-        android:name=".App"
+        android:name="com.example.financialassistant.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.Activity.MainActivity">
+        <activity android:name="com.example.financialassistant.UI.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activity.DocumentActivity" />
-        <activity android:name=".UI.Activity.AddIncomeActivity" />
-        <activity android:name=".UI.Activity.IncomeActivity" />
-        <activity android:name=".UI.Activity.CostActivity" />
-        <activity android:name=".UI.Activity.AddDocumentActivity" />
-        <activity android:name=".UI.Activity.AddCostActivity" />
-        <activity android:name=".UI.Activity.StatisticsActivity" />
-        <activity android:name=".UI.Activity.StatisticsIncomeActivity" />
-        <activity android:name=".UI.Activity.StatisticsCostActivity" />
-        <activity android:name=".UI.Activity.UpIncomeActivity" />
-        <activity android:name=".UI.Activity.UpCostActivity" />
-        <activity android:name=".UI.Activity.UpDocumentActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.DocumentActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.AddIncomeActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.IncomeActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.CostActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.AddDocumentActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.AddCostActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.StatisticsActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.StatisticsIncomeActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.StatisticsCostActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.UpIncomeActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.UpCostActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.UpDocumentActivity" />
     </application>
 
 </manifest>

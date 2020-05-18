@@ -2,6 +2,7 @@ package com.example.financialassistant.UI.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import com.example.financialassistant.DB.Model.CategoryIncome;
 import com.example.financialassistant.UI.Activity.adapter.SomeStatisticsIncomeRecyclerAdapter;
 import com.example.myroom1.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -90,6 +92,8 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
                 s = parent.getSelectedItem().toString();
                 getNameIdCategory(categoryModels);
                 flag = true;
+                date_s.setText("Начало периода");
+                date_f.setText("Конец периода");
             }
 
             @Override
@@ -173,6 +177,7 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
                         date_s.setText(selectedDate);
                         date_s.setVisibility(View.VISIBLE);
                         flag2 = true;
+                        some();
                     }});
             }
         });
@@ -206,7 +211,7 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
                         date_f.setText(selectedDate1);
                         date_f.setVisibility(View.VISIBLE);
                         flag1 = true;
-                        period();
+                        some();
                     }});
             }
         });
@@ -221,10 +226,16 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
 
     public void all_category(View view) {
         flag = false;
-
+        date_s.setText("Начало периода");
+        date_f.setText("Конец периода");
     }
 
     public void month(View view) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        String sDate = sdf.format(timeMilli_month);
+        String fDate = sdf.format(timeMilli_now);
+        date_s.setText(sDate);
+        date_f.setText(fDate);
         if (flag == true)
         {   SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilli_month,timeMilli_now, idcategory));
          //   recyclerAdapter.setOnDeleteListener(this);
@@ -245,6 +256,11 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
     }
 
     public void week(View view) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        String sDate = sdf.format(timeMilli_week);
+        String fDate = sdf.format(timeMilli_now);
+        date_s.setText(sDate);
+        date_f.setText(fDate);
         if (flag == true)
         {SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilli_week, timeMilli_now, idcategory));
            // recyclerAdapter.setOnDeleteListener(this);
@@ -254,10 +270,10 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
             sum.setText(str);
         }
         else {
-            SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilliStart, timeMilliFinish));
+            SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_week, timeMilli_now));
           //  recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
-            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilliStart, timeMilliFinish);
+            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilli_week, timeMilli_now);
             String str = String.valueOf(summa);
             sum.setText(str);
         }
@@ -285,28 +301,35 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
     }
 
     public void some() {
-  /*      if (start == false)
+        if (flag2 == false ){
+            showToast();}
+        else {if (flag1 == false ){
+            showToast();}
+        else if (timeMilliStart > timeMilliFinish)
         {
-            Intent intent1 = new Intent(this, PeriodActivity.class);
-            startActivity(intent1);
-            start = true;
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Дата начала больше даты окончания периода!",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }
         else
-        {
-            Intent intent = getIntent();
-            Bundle arguments = getIntent().getExtras();
-            start_period = arguments.getLong("start");
-            finish_period = arguments.getLong("finish");
-            start = arguments.getBoolean("flag_start");
             period();
-        }*/
+    }}
+    public void showToast() {
+        //создаём и отображаем текстовое уведомление
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Выберите дату начала и окончания периода!",
+                Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
     public void period() {
         if (flag == true)
-        {SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(start_period, finish_period, idcategory));
+        {SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(timeMilliStart, timeMilliFinish, idcategory));
             // recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
-            summa = databaseHelper.getIncomeDao().getSumByMonthOrWeekFromCategory(start_period, finish_period, idcategory);
+            summa = databaseHelper.getIncomeDao().getSumByMonthOrWeekFromCategory(timeMilliStart, timeMilliFinish, idcategory);
             String str = String.valueOf(summa);
             sum.setText(str);
         }

@@ -67,8 +67,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -97,8 +95,23 @@
                     android:text="За неделю"
                     android:layout_marginLeft="5dp"/>/>
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -117,7 +130,8 @@
                     android:ems="10"
                     android:hint="Начало периода"
                     android:inputType="textPersonName"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:gravity="center"/>
 
                 <CalendarView
                     android:id="@+id/date_start_document"
@@ -128,8 +142,15 @@
                     android:visibility="visible" />
 
             </LinearLayout>
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -147,7 +168,8 @@
                     android:ems="10"
                     android:hint="Конец периода"
                     android:inputType="textPersonName"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:gravity="center"/>
 
                 <CalendarView
                     android:id="@+id/date_finish_document"
@@ -157,11 +179,15 @@
                     android:ems="10"
                     android:visibility="visible" />
             </LinearLayout>
+
+
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="4dp"
-
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -189,11 +215,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:orientation="vertical"
-
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

@@ -10,16 +10,6 @@
         android:padding="10dp"
         style="@style/MyLayStyle">
 
-        <EditText
-            style="@style/MyTextLayStyle"
-            android:id="@+id/name_document"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:hint="Название документа"
-            android:inputType="textPersonName" />
-
         <TextView
             style="@style/MyTextStyle"
             android:id="@+id/date_s"
@@ -27,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Дата начала действия документа"
+            android:hint="Дата начала периода"
             android:inputType="textPersonName"
             android:visibility="visible" />
 
@@ -37,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-
             android:visibility="visible" />
 
         <TextView
@@ -47,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="Дата окончания действия документа"
+            android:hint="Дата окончания периода"
             android:inputType="textPersonName"
             android:visibility="visible" />
 

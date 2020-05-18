@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:typeface = "serif"
     tools:context="com.example.financialassistant.UI.Activity.MainActivity">
     <ImageView
         android:layout_width="match_parent"
@@ -34,6 +35,7 @@
             android:scrollbarFadeDuration="250"
             android:text="Доходы"
             android:textColorHint="#29AF2E"
+            android:typeface = "serif"
              />
 
         <Button
@@ -45,7 +47,8 @@
             android:layout_gravity="center_horizontal"
             android:background="#00FF00"
             android:text="Расходы"
-            android:onClick="adds"/>
+            android:onClick="adds"
+            android:typeface = "serif"/>
         <Button
             android:id="@+id/button5"
             android:layout_marginTop="4dp"
@@ -55,7 +58,8 @@
             android:layout_gravity="center_horizontal"
             android:background="#00FF00"
             android:text="Документы"
-            android:onClick="doc"/>
+            android:onClick="doc"
+            android:typeface = "serif"/>
         <Button
             android:id="@+id/statistics"
             android:layout_marginTop="4dp"
@@ -65,7 +69,8 @@
             android:layout_gravity="center_horizontal"
             android:background="#00FF00"
             android:text="Статистика"
-            android:onClick="statistics"/>
+            android:onClick="statistics"
+            android:typeface = "serif"/>
 
     </LinearLayout>
 

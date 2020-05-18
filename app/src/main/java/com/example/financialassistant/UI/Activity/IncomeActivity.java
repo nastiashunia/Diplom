@@ -102,9 +102,9 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     @Override
     protected void onResume() {
         super.onResume();
-        recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
+        /*recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
         recyclerAdapter.setOnClickListener(this);
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(recyclerAdapter);*/
     }
 
     @Override

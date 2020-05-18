@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.financialassistant.App;
@@ -69,6 +70,8 @@ public class SomeStatisticsCostRecyclerAdapter extends RecyclerView.Adapter<Recy
         viewHolder.dateCost.setText(sDate);
         //viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
         viewHolder.documentCost.setText(namedocument);
+        viewHolder.up.setVisibility(View.GONE);
+        viewHolder.delete.setVisibility(View.GONE);
     }
 
     @Override
@@ -89,7 +92,11 @@ public class SomeStatisticsCostRecyclerAdapter extends RecyclerView.Adapter<Recy
         public TextView categoryCost;
         @BindView(R.id.documentCost)
         public TextView documentCost;
+        @BindView(R.id.up)
+        public ImageButton up;
 
+        @BindView(R.id.delete)
+        public ImageButton delete;
         public NewsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

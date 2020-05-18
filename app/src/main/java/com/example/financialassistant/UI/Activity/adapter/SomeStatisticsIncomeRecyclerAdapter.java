@@ -4,6 +4,7 @@ package com.example.financialassistant.UI.Activity.adapter;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.ImageButton;
         import android.widget.TextView;
 
         import androidx.recyclerview.widget.RecyclerView;
@@ -46,12 +47,14 @@ public class SomeStatisticsIncomeRecyclerAdapter extends RecyclerView.Adapter<Re
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_some_statistics_income, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_some_income, parent, false);
         return new NewsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+
+
         final NewsViewHolder viewHolder = (NewsViewHolder) holder;
         date = incomeModels.get(position).date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -73,6 +76,8 @@ public class SomeStatisticsIncomeRecyclerAdapter extends RecyclerView.Adapter<Re
         viewHolder.dateIncome.setText(sDate);
         //viewHolder.documentIncome.setText(String.valueOf(incomeModels.get(position).documentId));
         viewHolder.documentIncome.setText(namedocument);
+        viewHolder.up.setVisibility(View.GONE);
+        viewHolder.delete.setVisibility(View.GONE);
     }
 
     @Override
@@ -94,6 +99,12 @@ public class SomeStatisticsIncomeRecyclerAdapter extends RecyclerView.Adapter<Re
         public TextView categoryIncome;
         @BindView(R.id.documentIncome)
         public TextView documentIncome;
+        @BindView(R.id.up)
+        public ImageButton up;
+
+        @BindView(R.id.delete)
+        public ImageButton delete;
+
 
         public NewsViewHolder(View itemView) {
             super(itemView);

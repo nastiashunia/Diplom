@@ -29,6 +29,10 @@
         <activity android:name="com.example.financialassistant.UI.Activity.UpIncomeActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.UpCostActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.UpDocumentActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.AllStatisticsActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.PeriodActivity" />
+
+
     </application>
 
 </manifest>

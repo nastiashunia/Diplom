@@ -1,11 +1,14 @@
 package com.example.financialassistant.UI.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +28,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StatisticsIncomeActivity extends AppCompatActivity  {
+    @BindView(R.id.date_start_document)
+    CalendarView date_start_document;
+    @BindView(R.id.date_finish_document)
+    CalendarView date_finish_document;
+
+    @BindView(R.id.date_f)
+    TextView date_f;
+    @BindView(R.id.date_s)
+    TextView date_s;
+
+    Boolean flag2 = false;
+    Boolean flag1 = false;
+
+    long timeMilliStart;
+    long timeMilliFinish;
 
     long timeMilli_month;
     long timeMilli_now;
@@ -37,9 +55,10 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
     TextView sum;
     Long idcategory;
     String s;
-    Boolean flag;
+    Boolean flag, start = false;
     int summa;
-
+    long start_period;
+    long finish_period;
     private DatabaseHelper databaseHelper;
 
     private List<CategoryIncome> categoryModels = new ArrayList<>();
@@ -112,22 +131,93 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
         timeMilli_week = week.getTimeInMillis(); // дата за вычетом недели , т.е. начало недели , от какой даты идет отсчет
         timeMilli_month = mon.getTimeInMillis(); // дата начала месяца, 1 число месяца
 
+
+       /* Intent intent = getIntent();
+        Bundle arguments = getIntent().getExtras();
+        if(start == true){
+        start_period = arguments.getLong("start");
+        finish_period = arguments.getLong("finish");
+        start = arguments.getBoolean("flag_start");
+
+        period();}*/
+
+        date_start_document.setVisibility(View.GONE);
+        date_finish_document.setVisibility(View.GONE);
+
+        date_start_document = (CalendarView)findViewById(R.id.date_start_document);
+
+        date_s.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date_start_document.setVisibility(View.VISIBLE);
+                date_start_document.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
+
+                    @Override
+                    public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
+
+                        int mYear = year;
+                        int mMonth = month;
+                        int mDay = dayOfMonth;
+
+                        String selectedDate = new StringBuilder().append(mDay)
+                                .append(".").append(mMonth + 1).append(".").append(mYear)
+                                .append(" ").toString();
+
+                        Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
+
+                        date_start_document.setVisibility(View.GONE);
+                        Calendar c = Calendar.getInstance();
+                        c.set(year, month , dayOfMonth, 0 ,0);
+                        timeMilliStart = c.getTimeInMillis();
+
+                        date_s.setText(selectedDate);
+                        date_s.setVisibility(View.VISIBLE);
+                        flag2 = true;
+                    }});
+            }
+        });
+
+        date_finish_document = (CalendarView)findViewById(R.id.date_finish_document);
+
+        date_f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date_finish_document.setVisibility(View.VISIBLE);
+                date_finish_document.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
+
+                    @Override
+                    public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
+
+                        int mYear = year;
+                        int mMonth = month;
+                        int mDay = dayOfMonth;
+
+                        String selectedDate1 = new StringBuilder().append(mDay)
+                                .append(".").append(mMonth + 1).append(".").append(mYear)
+                                .append(" ").toString();
+
+                        Toast.makeText(getApplicationContext(), selectedDate1, Toast.LENGTH_SHORT).show();
+
+                        date_finish_document.setVisibility(View.GONE);
+                        Calendar f = Calendar.getInstance();
+                        f.set(year, month , dayOfMonth, 0 ,0);
+                        timeMilliFinish = f.getTimeInMillis();
+
+                        date_f.setText(selectedDate1);
+                        date_f.setVisibility(View.VISIBLE);
+                        flag1 = true;
+                        period();
+                    }});
+            }
+        });
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
-       /* SomeIncomeRecyclerAdapter recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-        recyclerAdapter.setOnDeleteListener(this);
-        recyclerView.setAdapter(recyclerAdapter);*/
     }
 
-/*@Override
-    public void onDelete(Income incomeModel) {
-        databaseHelper.getIncomeDao().deleteIncome(incomeModel);
-    }*/
 
     public void all_category(View view) {
         flag = false;
@@ -152,9 +242,6 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
             String str = String.valueOf(summa);
             sum.setText(str);
         }
-
-
-
     }
 
     public void week(View view) {
@@ -167,10 +254,10 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
             sum.setText(str);
         }
         else {
-            SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilli_week, timeMilli_now));
+            SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilliStart, timeMilliFinish));
           //  recyclerAdapter.setOnDeleteListener(this);
             recyclerView.setAdapter(recyclerAdapter);
-            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilli_week, timeMilli_now);
+            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilliStart, timeMilliFinish);
             String str = String.valueOf(summa);
             sum.setText(str);
         }
@@ -197,4 +284,51 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
         }
     }
 
+    public void some() {
+  /*      if (start == false)
+        {
+            Intent intent1 = new Intent(this, PeriodActivity.class);
+            startActivity(intent1);
+            start = true;
+        }
+        else
+        {
+            Intent intent = getIntent();
+            Bundle arguments = getIntent().getExtras();
+            start_period = arguments.getLong("start");
+            finish_period = arguments.getLong("finish");
+            start = arguments.getBoolean("flag_start");
+            period();
+        }*/
+    }
+    public void period() {
+        if (flag == true)
+        {SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeekFromCategory(start_period, finish_period, idcategory));
+            // recyclerAdapter.setOnDeleteListener(this);
+            recyclerView.setAdapter(recyclerAdapter);
+            summa = databaseHelper.getIncomeDao().getSumByMonthOrWeekFromCategory(start_period, finish_period, idcategory);
+            String str = String.valueOf(summa);
+            sum.setText(str);
+        }
+        else {
+            SomeStatisticsIncomeRecyclerAdapter recyclerAdapter = new SomeStatisticsIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByMonthOrWeek(timeMilliStart, timeMilliFinish));
+            //  recyclerAdapter.setOnDeleteListener(this);
+            recyclerView.setAdapter(recyclerAdapter);
+            summa = databaseHelper.getIncomeDao().getSumAllByMonthOrWeek(timeMilliStart, timeMilliFinish);
+            String str = String.valueOf(summa);
+            sum.setText(str);
+        }
+
+
+    }
 }
+/*<Button
+                    style="@style/MyButtonStyle"
+                            android:id="@+id/some"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/recyclerView"
+                            android:layout_weight="1"
+                            android:onClick="some"
+                            android:text="За период"
+                            android:layout_marginLeft="10dp"/>*/

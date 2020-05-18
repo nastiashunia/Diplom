@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.financialassistant.UI.Activity.StatisticsIncomeActivity">
+    tools:context="com.example.financialassistant.UI.Activity.AllStatisticsActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical"
-        style="@style/MyLayStyle">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,71 +19,137 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="4dp">
 
-            <TextView
-                style="@style/MyTextLayStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Выбор по категории доходов:"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="30dp"
+                style="@style/MyLayStyle"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Spinner
-                    android:id="@+id/name_category_search"
-                    android:layout_height="35dp"
-                    android:layout_width="wrap_content"
-                    android:text="TextView"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:layout_weight="6"
-                     />
-
-                <Button
-                    android:id="@+id/all_category"
-                    style="@style/MyButtonSaveStyle"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="35dp"
-                    android:layout_width="wrap_content"
-                    android:layout_above="@id/recyclerView"
-                    android:onClick="all_category"
-                    android:text="Все"
-                    android:textSize="14sp"
-                    android:textStyle="normal"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <Button
-                    style="@style/MyButtonStyle"
-                    android:id="@+id/month"
+                <TextView
+                    android:id="@+id/sum_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Год:      "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/sum_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Месяц:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/sum_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Неделя:"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/MyLayStyle"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <TextView
+                style="@style/MyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Разница между доходом и расходом"
+                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                style="@style/MyLayStyle"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/raz_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Год:      "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/raz_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Месяц:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/raz_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Неделя:"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/month"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_above="@id/recyclerView"
                     android:onClick="month"
-                    android:text="За месяц"
-                    android:layout_marginRight="5dp"/>
+                    android:text="Месяцы" />
 
                 <Button
                     style="@style/MyButtonStyle"
@@ -92,70 +157,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/recyclerView"
-                    android:layout_weight="1"
                     android:onClick="week"
-                    android:text="За неделю"
-                    android:layout_marginLeft="5dp"/>/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    style="@style/MyTextStyle"
-                    android:id="@+id/date_s"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="Начало периода"
-                    android:inputType="textPersonName"
-                    android:visibility="visible" />
-
-                <CalendarView
-                    android:id="@+id/date_start_document"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:visibility="visible" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                <TextView
-                    style="@style/MyTextStyle"
-                    android:id="@+id/date_f"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="Конец периода"
-                    android:inputType="textPersonName"
-                    android:visibility="visible" />
-
-                <CalendarView
-                    android:id="@+id/date_finish_document"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:visibility="visible" />
+                    android:text="Недели" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,19 +172,24 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    style="@style/MyTextLayStyle"
-                    android:id="@+id/sum_text"
+                    style="@style/MyTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Сумма:"
+                    android:text="Категории"
                     />
                 <TextView
-                    style="@style/MyTextLayStyle"
-                    android:id="@+id/sum"
+                    style="@style/MyTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="12" />
+                    android:layout_weight="1"
+                    android:text="Текущий   "/>
+                <TextView
+                    style="@style/MyTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Прошедший"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -189,11 +197,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:orientation="vertical"
-
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

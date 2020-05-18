@@ -9,11 +9,40 @@
     </style>
 
 
-        <style name="MyTextStyle" >
-            <item name="android:textSize">18sp</item>
-            <item name="android:textColor">#00FF00</item>
-            <item name="android:typeface">monospace</item>
-        </style>
+    <style name="MyTextStyle" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#555951</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
 
+    <style name="MyTextLayStyle" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#555951</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+
+    <style name="MyLayStyle" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
+    <style name="MyButtonStyle" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:typeface">serif</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">#7FFF00</item>
+        <item name="android:textColor">#555951</item>
+    </style>
+
+    <style name="MyButtonSaveStyle" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:typeface">serif</item>
+        <item name="android:background">#7FFF00</item>
+        <item name="android:textColor">#555951</item>
+    </style>
 
 </resources>

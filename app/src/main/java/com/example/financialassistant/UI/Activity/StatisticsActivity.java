@@ -25,4 +25,8 @@ public class StatisticsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void all(View view) {
+        Intent intent = new Intent(this, AllStatisticsActivity.class);
+        startActivity(intent);
+    }
 }

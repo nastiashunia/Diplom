@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/money2"
+        android:src="@drawable/main_icon_green"
         android:scaleType="fitXY"
         android:alpha="0.7"/>
 
@@ -28,12 +28,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#00FF00"
+            android:background="#8cc72f"
             android:onClick="income"
             android:scrollbarDefaultDelayBeforeFade="400"
             android:scrollbarFadeDuration="250"
             android:text="Cтатистика по доходам"
-            android:textColorHint="#29AF2E" />
+            android:textColorHint="#29AF2E"
+            android:typeface="serif" />
 
         <Button
             android:id="@+id/button4"
@@ -42,9 +43,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#00FF00"
+            android:background="#8cc72f"
             android:onClick="cost"
-            android:text="Cтатистика по расходам" />
+            android:text="Cтатистика по расходам"
+            android:textColorHint="#29AF2E"
+            android:typeface="serif"/>
 
         <Button
             android:id="@+id/button5"
@@ -53,9 +56,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#00FF00"
+            android:background="#8cc72f"
             android:onClick="all"
-            android:text="Отчет" />
+            android:text="Отчет"
+            android:textColorHint="#29AF2E"
+            android:typeface="serif"/>
 
 
     </LinearLayout>

@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/tableLayout1"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:shrinkColumns="*"
-android:stretchColumns="*"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:typeface = "serif"
+    tools:context="com.example.financialassistant.UI.Activity.AddIncomeActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/icon_2"
+        android:scaleType="fitXY"
+        android:alpha="0.7"/>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="*"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp">
+    android:layout_marginLeft="10dp"
+
+    >
 
     <TableRow
         android:id="@+id/tableRow0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
+        android:gravity="center_horizontal"
+        >
 
         <TextView
             android:id="@+id/textView9"
@@ -26,16 +42,20 @@ android:stretchColumns="*"
             android:textColor="#C80A0A0A"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:typeface="serif"></TextView>
+            android:typeface="serif"
+            ></TextView>
     </TableRow>
 
 <TableRow
     android:id="@+id/tableRow1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:gravity="center_horizontal">
 
     <TextView
-        android:text="" >
+        android:text=""
+        >
     </TextView>
 
     <TextView
@@ -43,7 +63,8 @@ android:stretchColumns="*"
         android:text="Год"
         android:textStyle="bold"
         android:typeface="serif"
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
@@ -51,7 +72,8 @@ android:stretchColumns="*"
         android:text="Месяц"
         android:textStyle="bold"
         android:typeface="serif"
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
@@ -59,7 +81,8 @@ android:stretchColumns="*"
         android:text="Неделя"
         android:textStyle="bold"
         android:typeface="serif"
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
 </TableRow>
@@ -67,34 +90,39 @@ android:stretchColumns="*"
 <TableRow
     android:id="@+id/tableRow2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
 
     <TextView
 
         android:text="Доходы"
         android:textStyle="bold"
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
         android:id="@+id/sum_income_year"
         android:gravity="center_horizontal"
         android:text=""
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
         android:id="@+id/sum_income_month"
         android:gravity="center_horizontal"
         android:text=""
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
         android:id="@+id/sum_income_week"
         android:gravity="center_horizontal"
         android:text=""
-        android:textSize="18dp">
+        android:textSize="18dp"
+        android:background="@drawable/cell_shape">
     </TextView>
 
 </TableRow>
@@ -102,31 +130,34 @@ android:stretchColumns="*"
 <TableRow
     android:id="@+id/tableRow3"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
     <TextView
 
         android:textSize="18dp"
         android:text="Расходы"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:background="@drawable/cell_shape">
     </TextView>
     <TextView
         android:id="@+id/sum_cost_year"
         android:textSize="18dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
         android:id="@+id/sum_cost_month"
         android:gravity="center_horizontal"
         android:textSize="18dp"
- >
+        android:background="@drawable/cell_shape">
     </TextView>
 
     <TextView
         android:id="@+id/sum_cost_week"
         android:gravity="center_horizontal"
         android:textSize="18dp"
- >
+        android:background="@drawable/cell_shape">
     </TextView>
 
 
@@ -136,32 +167,38 @@ android:stretchColumns="*"
     <TableRow
         android:id="@+id/tableRow4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
         <TextView
             android:textSize="18dp"
             android:text="Разница"
-            android:textStyle="bold" >
+            android:textStyle="bold"
+            android:background="@drawable/cell_shape">
         </TextView>
 
         <TextView
             android:id="@+id/raz_year"
             android:gravity="center_horizontal"
-            android:textSize="18dp">
+            android:textSize="18dp"
+            android:background="@drawable/cell_shape">
         </TextView>
 
         <TextView
             android:id="@+id/raz_month"
             android:gravity="center_horizontal"
-            android:textSize="18dp">
+            android:textSize="18dp"
+            android:background="@drawable/cell_shape">
         </TextView>
 
         <TextView
             android:id="@+id/raz_week"
             android:gravity="center_horizontal"
-            android:textSize="18dp">
+            android:textSize="18dp"
+            android:background="@drawable/cell_shape">
         </TextView>
 
     </TableRow>
 
 </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

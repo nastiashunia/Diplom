@@ -62,19 +62,19 @@
             android:id="@+id/delete"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="#F5F5F5"
+            android:background="#8cc72f"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_error" />
+            android:src="@drawable/icon_error_" />
 
         <ImageButton
             android:id="@+id/up"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="#F5F5F5"
+            android:background="#8cc72f"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/pen" />
+            android:src="@drawable/pen_" />
 
     </LinearLayout>
 

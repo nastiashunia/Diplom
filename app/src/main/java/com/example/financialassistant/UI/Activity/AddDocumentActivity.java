@@ -172,4 +172,5 @@ public class AddDocumentActivity extends AppCompatActivity {
 
         finish();
     }
+
 }

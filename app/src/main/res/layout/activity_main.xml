@@ -9,9 +9,9 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/money2"
+        android:src="@drawable/main_icon"
         android:scaleType="fitXY"
-        android:alpha="0.7"/>
+        android:alpha="1"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,48 +29,49 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="#00FF00"
+            android:background="#8cc72f"
             android:onClick="addi"
             android:scrollbarDefaultDelayBeforeFade="400"
             android:scrollbarFadeDuration="250"
             android:text="Доходы"
             android:textColorHint="#29AF2E"
-            android:typeface = "serif"
-             />
+            android:typeface="serif" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#00FF00"
-            android:text="Расходы"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#8cc72f"
             android:onClick="adds"
-            android:typeface = "serif"/>
+            android:text="Расходы"
+            android:typeface="serif" />
+
         <Button
             android:id="@+id/button5"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#00FF00"
-            android:text="Документы"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#8cc72f"
             android:onClick="doc"
-            android:typeface = "serif"/>
+            android:text="Документы"
+            android:typeface="serif" />
+
         <Button
             android:id="@+id/statistics"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#00FF00"
-            android:text="Статистика"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="#8cc72f"
             android:onClick="statistics"
-            android:typeface = "serif"/>
+            android:text="Статистика"
+            android:typeface="serif" />
 
     </LinearLayout>
 

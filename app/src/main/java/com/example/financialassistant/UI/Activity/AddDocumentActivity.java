@@ -39,7 +39,8 @@ public class AddDocumentActivity extends AppCompatActivity {
 
     Boolean flag = false;
     Boolean flag1 = false;
-
+    int count_click = 0;
+    int count_click_1 = 0;
     long timeMilliStart;
     long timeMilliFinish;
 
@@ -58,8 +59,10 @@ public class AddDocumentActivity extends AppCompatActivity {
         date_s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(count_click == 0){
+                    count_click = 1;
                 date_start_document.setVisibility(View.VISIBLE);
-        date_start_document.setOnDateChangeListener(new OnDateChangeListener(){
+                date_start_document.setOnDateChangeListener(new OnDateChangeListener(){
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
@@ -82,7 +85,13 @@ public class AddDocumentActivity extends AppCompatActivity {
                 date_s.setText(selectedDate);
                 date_s.setVisibility(View.VISIBLE);
                 flag = true;
+                count_click = 0;
             }});
+                }
+                else {
+                    date_start_document.setVisibility(View.GONE);
+                    count_click = 0;
+                }
             }
         });
 
@@ -91,8 +100,10 @@ public class AddDocumentActivity extends AppCompatActivity {
         date_f.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(count_click_1 == 0){
+                    count_click_1 = 1;
                 date_finish_document.setVisibility(View.VISIBLE);
-        date_finish_document.setOnDateChangeListener(new OnDateChangeListener(){
+                date_finish_document.setOnDateChangeListener(new OnDateChangeListener(){
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
@@ -115,7 +126,13 @@ public class AddDocumentActivity extends AppCompatActivity {
                 date_f.setText(selectedDate1);
                 date_f.setVisibility(View.VISIBLE);
                 flag1 = true;
+                count_click_1 = 0;
             }});
+                }
+                else {
+                    date_finish_document.setVisibility(View.GONE);
+                    count_click_1 = 0;
+                }
             }
         });
     }
@@ -141,15 +158,6 @@ public class AddDocumentActivity extends AppCompatActivity {
         else
             enter();}
     }
-
-    /*public void errorSave() {
-
-        String strsumCost = name_document.getText().toString();
-        if(TextUtils.isEmpty(strsumCost)) { name_document.setError("Введите наименование документа"); return; }
-        if (flag == false || flag1 == false){
-            showToast();}
-        else enter();
-    }*/
 
     public void showToast() {
         //создаём и отображаем текстовое уведомление

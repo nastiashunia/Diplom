@@ -64,7 +64,7 @@ public class AddIncomeActivity extends AppCompatActivity {
     long idcategory;
     long iddocument;
     private Context context;
-    int error = -1;
+    int count_click = 0;
     boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,33 +82,40 @@ public class AddIncomeActivity extends AppCompatActivity {
         dateT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dateIncome.setVisibility(View.VISIBLE);
-        dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
+                if(count_click == 0){
+                    count_click = 1;
+                    dateIncome.setVisibility(View.VISIBLE);
+                    dateIncome.setOnDateChangeListener(new OnDateChangeListener(){
 
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
+                        @Override
+                        public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
 
-                int mYear = year;
-                int mMonth = month;
-                int mDay = dayOfMonth;
+                            int mYear = year;
+                            int mMonth = month;
+                            int mDay = dayOfMonth;
 
-                String selectedDate = new StringBuilder().append(mDay)
-                        .append(".").append(mMonth + 1).append(".").append(mYear)
-                        .append(" ").toString();
+                            String selectedDate = new StringBuilder().append(mDay)
+                                    .append(".").append(mMonth + 1).append(".").append(mYear)
+                                    .append(" ").toString();
 
-                Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), selectedDate, Toast.LENGTH_SHORT).show();
 
-                date = dateIncome.getDate();
-                dateIncome.setVisibility(View.GONE);
-                Calendar c = Calendar.getInstance();
-                c.set(year, month , dayOfMonth, 0 ,0);
-                timeMilli2 = c.getTimeInMillis();
+                            date = dateIncome.getDate();
+                            dateIncome.setVisibility(View.GONE);
+                            Calendar c = Calendar.getInstance();
+                            c.set(year, month , dayOfMonth, 0 ,0);
+                            timeMilli2 = c.getTimeInMillis();
+                            dateT.setText(selectedDate);
+                            //dateT.setVisibility(View.VISIBLE);
+                            flag = true;
+                            count_click = 0;
+                        }});
+                }
+                else {
+                    dateIncome.setVisibility(View.GONE);
+                    count_click = 0;
+                    }
 
-
-                dateT.setText(selectedDate);
-                //dateT.setVisibility(View.VISIBLE);
-                flag = true;
-            }});
             }
         });
         databaseHelper = App.getInstance().getDatabaseInstance();
@@ -208,7 +215,6 @@ public class AddIncomeActivity extends AppCompatActivity {
        String strsumCost = sumIncome.getText().toString();
        if(TextUtils.isEmpty(strsumCost)) { sumIncome.setError("Введите сумму дохода в виде цифр"); return; }
         if (flag == false){
-            error = 1;
             showToast();}
         else enter();
     }

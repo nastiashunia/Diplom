@@ -14,6 +14,7 @@ import com.example.financialassistant.DB.Model.Income;
 import com.example.myroom1.R;
 
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +45,7 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     Boolean flag;
     SomeIncomeRecyclerAdapter recyclerAdapter;
     private DatabaseHelper databaseHelper;
+    List<String> strings;
 
     private List<CategoryIncome> categoryModels = new ArrayList<>();
 
@@ -59,7 +61,7 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
 
 
         categoryModels = databaseHelper.getCategoryIncomeDao().getAllCategoryIncome();
-        List<String> strings = getNamesFromListCategory(categoryModels);
+        strings = getNamesFromListCategory(categoryModels);
 
         ArrayAdapter categoryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
         name_category_search.setAdapter(categoryAdapter);
@@ -143,25 +145,35 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     }
 
     public void search(View view) {
-
-         recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
+        int index2 = strings.indexOf("");
+        name_category_search.setSelection(index2);
+        recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
     }
     public void poisk(){
-         recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
+        if ("".equals(s)){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Выберите категорию из выпадающего списка или все категории.",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+        else{
+        recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getIncomeByIdCategory(idcategory));
         recyclerAdapter.setOnClickListener(this);
 
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(recyclerAdapter);}
     }
 
     private List<String> getNamesFromListCategory(List<CategoryIncome> categoryModels){
         List<String> stringList = new ArrayList<>();
-
+        stringList.add("");
         for (CategoryIncome c: categoryModels){
             stringList.add(c.name);
         }
+
         return stringList;
     }
 

@@ -52,31 +52,20 @@ public class AddCostActivity extends AppCompatActivity {
     @BindView(R.id.documentCost)
     Spinner spinerDocument;
 
-
     private List<Document> documentModels = new ArrayList<>();
     private List<CategoryCost> categoryModels = new ArrayList<>();
     private DatabaseHelper databaseHelper;
 
-    String s;
-    String d;
-    long idcategory;
-    long iddocument;
+    String s,d;
+    long idcategory, iddocument;
     private Context context;
-    int error = -1;
     boolean flag = false;
-
+    int count_click = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_cost);
         ButterKnife.bind(this);
-
-
-
-
-
-
-
         setTitle("Добавить расход");
         dateCost = (CalendarView)findViewById(R.id.dateCost);
 
@@ -84,8 +73,10 @@ public class AddCostActivity extends AppCompatActivity {
         dateT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(count_click == 0){
+                    count_click = 1;
                 dateCost.setVisibility(View.VISIBLE);
-        dateCost.setOnDateChangeListener(new OnDateChangeListener(){
+                dateCost.setOnDateChangeListener(new OnDateChangeListener(){
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year,int month, int dayOfMonth) {
@@ -107,9 +98,14 @@ public class AddCostActivity extends AppCompatActivity {
                 timeMilli2 = c.getTimeInMillis();
 
                 dateT.setText(selectedDate);
-                //dateT.setVisibility(View.VISIBLE);
                 flag = true;
+                count_click = 0;
             }});
+                }
+                else {
+                    dateCost.setVisibility(View.GONE);
+                    count_click = 0;
+                }
             }
         });
 
@@ -206,7 +202,6 @@ public class AddCostActivity extends AppCompatActivity {
         String strsumCost = sumCost.getText().toString();
         if(TextUtils.isEmpty(strsumCost)) { sumCost.setError("Введите сумму расхода в виде цифр"); return; }
         if (flag == false){
-            error = 1;
             showToast();}
         else enter();
 
@@ -230,8 +225,6 @@ public class AddCostActivity extends AppCompatActivity {
         model.sum = Integer.parseInt(sumCost.getText().toString());
         model.date = timeMilli2;
         model.categoryCostId = idcategory;
-        //model.documentId = Long.parseLong(documentCost.getText().toString());
-        //model.documentId = iddocument;
 
         if ("".equals(d)){
             model.documentId = -1;  }
@@ -242,11 +235,3 @@ public class AddCostActivity extends AppCompatActivity {
         finish();
     }
 }
-//    public void showToast() {
-//        //создаём и отображаем текстовое уведомление
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                "Пора покормить кота!",
-//                Toast.LENGTH_SHORT);
-//        toast.setGravity(Gravity.CENTER, 0, 0);
-//        toast.show();
-//    }

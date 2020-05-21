@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.financialassistant.UI.Activity.AddIncomeActivity">
+    tools:context="com.example.financialassistant.UI.Activity.Activity.AddIncomeActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,7 +63,12 @@
         android:visibility="visible"
         />
 
-
+    <TextView
+    style="@style/MyTextStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Выберите категорию из списка:"
+    />
     <Spinner
         android:id="@+id/categoryIncome"
         android:layout_width="match_parent"
@@ -71,8 +76,13 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:textSize="20sp"
- />
-
+    />
+    <TextView
+        style="@style/MyTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите документ из списка:"
+        />
     <Spinner
         android:id="@+id/documentIncome"
         android:layout_width="match_parent"

@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.financialassistant.UI.Activity.CategoryIncomeActivity"
+        tools:context="com.example.financialassistant.UI.Activity.Activity.CategoryIncomeActivity"
         style="@style/MyLayStyle">
 
         <androidx.recyclerview.widget.RecyclerView

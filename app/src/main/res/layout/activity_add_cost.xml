@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:typeface = "serif"
-    tools:context="com.example.financialassistant.UI.Activity.AddCostActivity">
+    tools:context="com.example.financialassistant.UI.Activity.Activity.AddCostActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,7 +59,12 @@
         android:visibility="visible"
         />
 
-
+    <TextView
+        style="@style/MyTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите категорию из списка:"
+        />
     <Spinner
         android:id="@+id/categoryCost"
         android:layout_width="match_parent"
@@ -67,7 +72,12 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         />
-
+    <TextView
+        style="@style/MyTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите документ из списка:"
+        />
     <Spinner
         android:id="@+id/documentCost"
         android:layout_width="match_parent"

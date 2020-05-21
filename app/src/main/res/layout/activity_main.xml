@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:typeface = "serif"
-    tools:context="com.example.financialassistant.UI.Activity.MainActivity">
+    tools:context="com.example.financialassistant.UI.Activity.Activity.MainActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -19,8 +19,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-
 public class SomeStatisticsCostRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<Cost> costModels = new ArrayList<>();

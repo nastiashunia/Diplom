@@ -26,29 +26,8 @@
                 style="@style/MyTextLayStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Выбор по категории расходов:" />
-            <Spinner
-
-                android:id="@+id/name_category_search"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:text="TextView"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
-
-            <Button
-                style="@style/MyButtonSaveStyle"
-                android:id="@+id/all_category"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_above="@id/recyclerView"
-                android:onClick="all_category"
-                android:text="Все категории"
-                android:textSize="14sp"
-                android:textStyle="normal"
-/>
+                android:text="Выбор по категории расходов:"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,11 +40,45 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <Spinner
+                    android:id="@+id/name_category_search"
+                    android:layout_height="35dp"
+                    android:layout_width="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:layout_weight="6"
+                    />
+
                 <Button
-                    android:id="@+id/month"
+                    android:id="@+id/all_category"
+                    style="@style/MyButtonSaveStyle"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="35dp"
+                    android:layout_width="wrap_content"
+                    android:layout_above="@id/recyclerView"
+                    android:onClick="all_category"
+                    android:text="Все"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
                     style="@style/MyButtonStyle"
+                    android:id="@+id/month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_above="@id/recyclerView"
                     android:onClick="month"
                     android:text="За месяц"
@@ -77,16 +90,104 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/recyclerView"
+                    android:layout_weight="1"
                     android:onClick="week"
                     android:text="За неделю"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"/>/>
             </LinearLayout>
-            <LinearLayout
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        style="@style/MyTextStyle"
+                        android:id="@+id/date_s"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:hint="Начало периода"
+                        android:inputType="textPersonName"
+                        android:visibility="visible"
+                        android:gravity="center"/>
+
+                    <CalendarView
+                        android:id="@+id/date_start_document"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <TextView
+                        style="@style/MyTextStyle"
+                        android:id="@+id/date_f"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:hint="Конец периода"
+                        android:inputType="textPersonName"
+                        android:visibility="visible"
+                        android:gravity="center"/>
+
+                    <CalendarView
+                        android:id="@+id/date_finish_document"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ems="10"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="4dp"
-
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -95,6 +196,7 @@
 
                 <TextView
                     style="@style/MyTextLayStyle"
+                    android:id="@+id/sum_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -113,11 +215,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:orientation="vertical"
-
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

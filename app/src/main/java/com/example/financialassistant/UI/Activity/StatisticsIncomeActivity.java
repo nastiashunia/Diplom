@@ -73,8 +73,6 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_statistics_income);
         setTitle("Статистика доходов");
 
-
-
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -290,7 +288,6 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
         List<String> stringList = new ArrayList<>();
         stringList.add("");
         for (CategoryIncome c: categoryModels){
-
             stringList.add(c.name);
         }
         return stringList;

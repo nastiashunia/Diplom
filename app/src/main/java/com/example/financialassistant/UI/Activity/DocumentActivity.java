@@ -62,8 +62,7 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
     @Override
     protected void onResume() {
         super.onResume();
-
-         recyclerAdapter = new SomeDocumentRecyclerAdapter(this, databaseHelper.getDocumentDao().getAllDocument());
+        recyclerAdapter = new SomeDocumentRecyclerAdapter(this, databaseHelper.getDocumentDao().getAllDocument());
         recyclerAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -75,7 +74,7 @@ public class DocumentActivity extends AppCompatActivity implements SomeDocumentR
         String yes = "Удалить документ";
         String no = "Отмена";
         alert.setTitle("Удалить");
-        alert.setMessage("Вы действительно хотите удалить эту запись?");
+        alert.setMessage("Если вы удалите этот документ, то он удалится из доходов/расходов, введеных с ним ранее. Вы действительно хотите удалить эту запись?");
         alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {

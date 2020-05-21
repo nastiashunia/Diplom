@@ -106,10 +106,6 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
         return false;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
     @Override
     public void onDelete(Income incomeModel) {
@@ -189,3 +185,8 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
         }
     }
 }
+/*
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }*/

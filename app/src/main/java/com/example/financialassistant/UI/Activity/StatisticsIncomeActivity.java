@@ -355,13 +355,3 @@ public class StatisticsIncomeActivity extends AppCompatActivity  {
 
     }
 }
-/*<Button
-                    style="@style/MyButtonStyle"
-                            android:id="@+id/some"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@id/recyclerView"
-                            android:layout_weight="1"
-                            android:onClick="some"
-                            android:text="За период"
-                            android:layout_marginLeft="10dp"/>*/

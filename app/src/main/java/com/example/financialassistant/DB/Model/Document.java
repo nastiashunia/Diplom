@@ -13,8 +13,6 @@ public class Document {
 
     public String name;
 
-    public int sum;
-
     public long start_date;
 
     public long finish_date;

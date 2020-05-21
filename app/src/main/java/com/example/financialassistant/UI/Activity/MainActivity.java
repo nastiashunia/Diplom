@@ -3,6 +3,7 @@ package com.example.financialassistant.UI.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 
@@ -86,7 +87,11 @@ public class MainActivity extends AppCompatActivity {
                         .setSmallIcon(android.R.drawable.ic_dialog_info)
                         .setContentTitle("Напоминание")
                         .setContentText(str3)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_more)) // большая картинка
+
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(str3))
+                .setAutoCancel(true); // автоматически закрыть уведомление после нажатия
 
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(MainActivity.this);

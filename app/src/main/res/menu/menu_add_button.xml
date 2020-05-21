@@ -9,7 +9,10 @@
         android:id="@+id/action_add"
         android:title="Добавить"
         app:showAsAction="always"/>
-
+    <item
+        android:id="@+id/action_category"
+        android:title="Категории">
+    </item>
 
 
 </menu>

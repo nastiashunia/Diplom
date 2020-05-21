@@ -23,6 +23,9 @@ public interface IncomeDao {
     @Update
     void updateIncome(Income income);
 
+    @Query("DELETE FROM Income WHERE categoryincome_id = :categoryIncomeId")
+    int deleteByCategory (long categoryIncomeId);
+
     @Query("SELECT * FROM Income")
     List<Income> getAllIncome();
 

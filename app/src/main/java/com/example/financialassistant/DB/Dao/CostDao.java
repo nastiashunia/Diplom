@@ -22,6 +22,9 @@ public interface CostDao {
     @Update
     void updateCost(Cost cost);
 
+    @Query("DELETE FROM Cost WHERE categorycost_id = :categoryCostId")
+    int deleteByCategory (long categoryCostId);
+
     @Query("SELECT * FROM Cost WHERE id = :costId")
     Cost getCostById(long costId);
 

@@ -97,6 +97,11 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
                 startActivity(new Intent(this, AddIncomeActivity.class));
                 break;
             }
+            case R.id.action_category:
+            {
+                startActivity(new Intent(this, CategoryIncomeActivity.class));
+                break;
+            }
         }
         return false;
     }
@@ -104,9 +109,6 @@ public class IncomeActivity extends AppCompatActivity implements SomeIncomeRecyc
     @Override
     protected void onResume() {
         super.onResume();
-        /*recyclerAdapter = new SomeIncomeRecyclerAdapter(this, databaseHelper.getIncomeDao().getAllIncome());
-        recyclerAdapter.setOnClickListener(this);
-        recyclerView.setAdapter(recyclerAdapter);*/
     }
 
     @Override

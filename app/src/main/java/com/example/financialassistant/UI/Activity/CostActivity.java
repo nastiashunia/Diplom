@@ -92,6 +92,11 @@ public class CostActivity extends AppCompatActivity implements SomeCostRecyclerA
                 startActivity(new Intent(this, AddCostActivity.class));
                 break;
             }
+            case R.id.action_category:
+            {
+                startActivity(new Intent(this, CategoryCostActivity.class));
+                break;
+            }
         }
         return false;
     }

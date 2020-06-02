@@ -1,12 +1,9 @@
 package com.example.financialassistant.DB.Model;
 
-import android.text.Editable;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity

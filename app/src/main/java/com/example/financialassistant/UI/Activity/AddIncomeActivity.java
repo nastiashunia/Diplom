@@ -64,6 +64,7 @@ public class AddIncomeActivity extends AppCompatActivity {
     String d;
     long idcategory;
     long iddocument;
+    long idperiod;
     private Context context;
     int count_click = 0;
     boolean flag = false;
@@ -156,6 +157,8 @@ public class AddIncomeActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 d = parent.getSelectedItem().toString();
                 getNameIdDocument(documentModels);
+               /* if (d != "")
+                upDocument();*/
             }
 
             @Override
@@ -200,6 +203,7 @@ public class AddIncomeActivity extends AppCompatActivity {
         for (Document c: documentModels){
             if(d.equals(c.name)){
                 iddocument = c.id;
+                idperiod = c.id_period;
                 return;
             }
 
@@ -209,17 +213,77 @@ public class AddIncomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.save)
     public void onSaveClick() {
-        errorSave();
-    }
-
-   public void errorSave() {
-
-       String strsumCost = sumIncome.getText().toString();
-       if(TextUtils.isEmpty(strsumCost)) { sumIncome.setError("Введите сумму дохода в виде цифр"); return; }
+        //errorSave();
+        String strsumCost = sumIncome.getText().toString();
+        if(TextUtils.isEmpty(strsumCost)) { sumIncome.setError("Введите сумму дохода в виде цифр"); return; }
+        //upDocument();
         if (flag == false){
             showToast();}
         else enter();
     }
+
+
+   /*public void upDocument() {
+       long month = 2592000000l;
+       long year = 31536000000l;
+
+
+       if (idperiod == 2){
+           AlertDialog.Builder alert = new AlertDialog.Builder(this);
+           String yes = "Редактировать документ";
+           String no = "Отмена";
+           alert.setTitle("Редактировать");
+               alert.setMessage("Перевести напоминание на месяц вперед?");
+
+           alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+               public void onClick(DialogInterface dialog, int which) {
+                   Document document = new Document();
+                   document = databaseHelper.getDocumentDao().getDocumentById(iddocument);
+                   document.repeat_date = document.repeat_date + month ;
+                   databaseHelper.getDocumentDao().updateDocument(document);
+                   Toast.makeText(getApplicationContext(), "Напоминание обновлено", Toast.LENGTH_SHORT).show();
+               }
+           });
+           alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int which) {
+                           // close dialog
+                           dialog.cancel();
+                       }
+                   }
+           );
+           alert.show();
+       }
+
+       if (idperiod == 3) {
+
+           AlertDialog.Builder alert = new AlertDialog.Builder(this);
+           String yes = "Редактировать документ";
+           String no = "Отмена";
+           alert.setTitle("Редактировать");
+           alert.setMessage("Перевести напоминание на год вперед?");
+
+           alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+               public void onClick(DialogInterface dialog, int which) {
+                   Document document = new Document();
+                   document = databaseHelper.getDocumentDao().getDocumentById(iddocument);
+                   document.repeat_date = document.repeat_date + year;
+                   databaseHelper.getDocumentDao().updateDocument(document);
+                   Toast.makeText(getApplicationContext(), "Напоминание обновлено", Toast.LENGTH_SHORT).show();
+               }
+           });
+           alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int which) {
+                           // close dialog
+                           dialog.cancel();
+                       }
+                   }
+           );
+           alert.show();
+       }
+
+    }*/
 
     public void showToast() {
         //создаём и отображаем текстовое уведомление

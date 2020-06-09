@@ -31,6 +31,15 @@
             android:hint="Название документа"
             android:inputType="textPersonName" />
 
+        <Spinner
+            android:id="@+id/period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:textSize="20sp"
+
+            />
         <TextView
             style="@style/MyTextStyle"
             android:id="@+id/date_s"
@@ -70,6 +79,24 @@
             android:ems="10"
             android:visibility="visible" />
 
+
+        <TextView
+            style="@style/MyTextStyle"
+            android:id="@+id/replayDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Дата напоминания"
+            android:inputType="textPersonName" />
+
+        <CalendarView
+            android:id="@+id/date_replay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:visibility="visible" />
 
         <Button
             style="@style/MyButtonStyle"

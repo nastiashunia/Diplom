@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static String CHANNEL_ID = "Date document";
 
     private List<Document> documentModels = new ArrayList<>();
+   // private List<DocumentPeriod> documentperiodModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
         if (!hasVisited) {
             databaseHelper.run_category_income();
             databaseHelper.run_category_cost();
+            databaseHelper.run_document_period();
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
             e.commit();
+           // f();
         }
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         Calendar now = Calendar.getInstance();
@@ -77,6 +80,29 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
+  /*  public void f(){
+        DocumentPeriod documentPeriod = new DocumentPeriod();
+        documentperiodModels=databaseHelper.getDocumentPeriodDao().getAllDocumentPeriod();
+        String[] ONE ={"Справка", "Гарантия", "Другое"};
+        String[] MONTH ={"Квартплата", "Коммуникации", "Кредит", "Обучение","Другое"};
+        String[] YEAR ={"Страховка", "Обучение", "Другое"};
+
+        for (DocumentPeriod c: documentperiodModels){
+            if (c.name == "Одноразовые"){
+                for (int j = 0; j < ONE.length; j++){
+                    c.category_period = ONE[j];
+                    databaseHelper.getDocumentPeriodDao().updateDocumentPeriod(c);
+                }}
+            if (c.name == "Ежемесячные"){
+                for (int j = 0; j < MONTH.length; j++){
+                    c.category_period = MONTH[j];
+                    databaseHelper.getDocumentPeriodDao().updateDocumentPeriod(c);                }}
+            if (c.name == "Ежегодные"){
+                for (int j = 0; j < YEAR.length; j++){
+                    c.category_period = YEAR[j];
+                    databaseHelper.getDocumentPeriodDao().updateDocumentPeriod(c);                }}
+        }
+    }-*/
     public void Not (String name, String date, int id) {
         String str2 = "Истекает срок действия документа";
         String str4 = ". Дата истечения срока действия документа: ";
@@ -107,10 +133,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void doc(View view) {
+   /* public void doc(View view) {
         Intent intent1 = new Intent(this, DocumentActivity.class);
         startActivity(intent1);
-    }
+    }*/
+   public void doc(View view) {
+       Intent intent1 = new Intent(this, DocumentPeriodActivity.class);
+       startActivity(intent1);}
 
     public void statistics(View view) {
         Intent intent1 = new Intent(this, StatisticsActivity.class);

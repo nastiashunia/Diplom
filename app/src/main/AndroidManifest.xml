@@ -30,15 +30,15 @@
         <activity android:name="com.example.financialassistant.UI.Activity.UpCostActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.UpDocumentActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.AllStatisticsActivity" />
-        <activity android:name="com.example.financialassistant.UI.Activity.PeriodActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.CategoryCostActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.AddUpCategoryIncomeActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.AddUpCategoryCostActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.CategoryIncomeActivity" />
         <activity android:name="com.example.financialassistant.UI.Activity.DiagramActivity" />
 
-
-
+        <activity android:name="com.example.financialassistant.UI.Activity.DocumentPeriodActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.AddDocumentPeriodActivity" />
+        <activity android:name="com.example.financialassistant.UI.Activity.UpDocumentPeriodActivity" />
     </application>
 
 </manifest>

@@ -115,8 +115,6 @@ Boolean flag = false;
                     setPieChartCost();
 
                 }
-
-
             }
 
             @Override

@@ -5,20 +5,16 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Document {
-
+public class DocumentPeriod {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     public long id;
 
     public String name;
 
-    public long start_date;
+    public static final String[] DOCUMENT_PERIOD_START_NAME ={
+            "Одноразовые", "Ежемесячные", "Ежегодные"};
 
-    public long finish_date;
 
-    public long id_period;
-
-    public long repeat_date;
 
 }

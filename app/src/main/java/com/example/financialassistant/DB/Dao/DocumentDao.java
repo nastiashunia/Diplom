@@ -24,6 +24,9 @@ public interface DocumentDao {
     @Query("SELECT * FROM Document WHERE id = :documentId")
     Document getDocumentById(long documentId);
 
+    @Query("SELECT * FROM Document WHERE name = :docname")
+    List<Document> getDocumentByName(String docname);
+
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();
 

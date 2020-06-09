@@ -1,6 +1,7 @@
 package com.example.financialassistant.UI.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.financialassistant.App;
@@ -52,6 +54,7 @@ public class AddCostActivity extends AppCompatActivity {
     Spinner spinerCategory;
     @BindView(R.id.documentCost)
     Spinner spinerDocument;
+    long idperiod;
 
     private List<Document> documentModels = new ArrayList<>();
     private List<CategoryCost> categoryModels = new ArrayList<>();
@@ -138,8 +141,9 @@ public class AddCostActivity extends AppCompatActivity {
         documents.add("");
         ArrayAdapter documentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, documents);
         spinerDocument.setAdapter(documentAdapter);
-        int index2 = documents.indexOf("");
         Collections.sort(documents);
+        int index2 = documents.indexOf("");
+
         spinerDocument.setSelection(index2);
         spinerDocument.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -147,6 +151,8 @@ public class AddCostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 d = parent.getSelectedItem().toString();
                 getNameIdDocument(documentModels);
+                if (d != "")
+                    upDocument();
             }
 
             @Override
@@ -188,6 +194,7 @@ public class AddCostActivity extends AppCompatActivity {
         for (Document c: documentModels){
             if(d.equals(c.name)){
                 iddocument = c.id;
+                idperiod = c.id_period;
                 return;
             }
         }
@@ -235,5 +242,68 @@ public class AddCostActivity extends AppCompatActivity {
         databaseHelper.getCostDao().insertCost(model);
 
         finish();
+    }
+
+
+    public void upDocument() {
+        long month = 2592000000l;
+        long year = 31536000000l;
+
+
+        if (idperiod == 2){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            String yes = "Редактировать документ";
+            String no = "Отмена";
+            alert.setTitle("Редактировать");
+            alert.setMessage("Перевести напоминание на месяц вперед?");
+
+            alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    Document document = new Document();
+                    document = databaseHelper.getDocumentDao().getDocumentById(iddocument);
+                    document.repeat_date = document.repeat_date + month ;
+                    databaseHelper.getDocumentDao().updateDocument(document);
+                    Toast.makeText(getApplicationContext(), "Напоминание обновлено", Toast.LENGTH_SHORT).show();
+                }
+            });
+            alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // close dialog
+                            dialog.cancel();
+                        }
+                    }
+            );
+            alert.show();
+        }
+
+        if (idperiod == 3) {
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            String yes = "Редактировать документ";
+            String no = "Отмена";
+            alert.setTitle("Редактировать");
+            alert.setMessage("Перевести напоминание на год вперед?");
+
+            alert.setPositiveButton(yes, new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    Document document = new Document();
+                    document = databaseHelper.getDocumentDao().getDocumentById(iddocument);
+                    document.repeat_date = document.repeat_date + year;
+                    databaseHelper.getDocumentDao().updateDocument(document);
+                    Toast.makeText(getApplicationContext(), "Напоминание обновлено", Toast.LENGTH_SHORT).show();
+                }
+            });
+            alert.setNegativeButton(no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // close dialog
+                            dialog.cancel();
+                        }
+                    }
+            );
+            alert.show();
+        }
+
     }
 }

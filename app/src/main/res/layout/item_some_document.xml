@@ -54,8 +54,25 @@
                 android:text="TextView"
                 android:layout_weight="1"
                 android:gravity="center"/>
-            </LinearLayout>
 
+
+            </LinearLayout>
+            <TextView
+                style="@style/MyTextLayStyle"
+                android:id="@+id/period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:gravity="center"/>
+            <TextView
+                style="@style/MyTextLayStyle"
+                android:id="@+id/date_replay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:gravity="center"/>
         </LinearLayout>
 
         <ImageButton

@@ -34,7 +34,7 @@ public class CategoryCostActivity extends AppCompatActivity implements SomeCostC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_income);
-        setTitle("Категории доходов");
+        setTitle("Категории расходов");
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));

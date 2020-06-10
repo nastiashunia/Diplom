@@ -13,7 +13,7 @@ public class DocumentPeriod {
     public String name;
 
     public static final String[] DOCUMENT_PERIOD_START_NAME ={
-            "Одноразовые", "Ежемесячные", "Ежегодные"};
+            "Единовременные", "Ежемесячные", "Ежегодные"};
 
 
 

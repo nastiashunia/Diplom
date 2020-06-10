@@ -139,7 +139,7 @@ public class DocumentPeriodActivity extends AppCompatActivity implements SomeDoc
 
     private void getDocumentPeriod (List<DocumentPeriod> documentPeriodModels, List<Document> documentModels){
         int k = 1;
-        String x1 = "Одноразовые";
+        String x1 = "Единовременные";
         String x2 = "Ежемесячные";
         String x3 = "Ежегодные";
 
@@ -160,7 +160,7 @@ public class DocumentPeriodActivity extends AppCompatActivity implements SomeDoc
             k = 0;
         }
         if (k == 0){
-            expListDetail.put("Одноразовые", one);
+            expListDetail.put("Единовременные", one);
             expListDetail.put("Ежемесячные", month);
             expListDetail.put("Ежегодные", year);
         }

@@ -94,7 +94,7 @@ String nameperiod;
         ArrayAdapter documentAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, strings);
         period.setAdapter(documentAdapter);
         Collections.sort(strings);
-        int index2 = strings.indexOf("Одноразовые");
+        int index2 = strings.indexOf("Единовременные");
 
         period.setSelection(index2);
         period.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -270,7 +270,7 @@ String nameperiod;
     @OnClick(R.id.save)
     public void onSaveClick() {
         //errorSave();
-        String k = "Одноразовые";
+        String k = "Единовременные";
         String strsumCost = name_document.getText().toString();
         if(TextUtils.isEmpty(strsumCost)) { name_document.setError("Введите наименование документа"); return; }
         if (flag == false ){

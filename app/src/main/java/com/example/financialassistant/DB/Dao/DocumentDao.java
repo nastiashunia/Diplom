@@ -30,8 +30,11 @@ public interface DocumentDao {
     @Query("SELECT * FROM document")
     List<Document> getAllDocument();
 
-    @Query("SELECT * FROM document WHERE finish_date BETWEEN :dateStart AND :dateFinish")
+    @Query("SELECT * FROM document WHERE finish_date OR repeat_date BETWEEN :dateStart AND :dateFinish")
     List<Document> getAllDocumentDateFinish( long dateStart, long dateFinish);
+
+/*    @Query("SELECT * FROM document WHERE _date BETWEEN :dateStart AND :dateFinish")
+    List<Document> getAllDocumentDateRepeat( long dateStart, long dateFinish);*/
 
     /*@Query("SELECT Document.name FROM document WHERE id = :documentId")
     Document getByIdDocument(long documentId);*/

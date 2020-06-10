@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }-*/
     public void Not (String name, String date, int id) {
         String str2 = "Истекает срок действия документа";
-        String str4 = ". Дата истечения срока действия документа: ";
+        String str4 = ". Дата истечения срока действия/оплаты документа: ";
        // String str3 = String.join(" ", str2, name);
         String str3 = str2 + " " + name + str4 + " " + date;
         NotificationCompat.Builder builder =
